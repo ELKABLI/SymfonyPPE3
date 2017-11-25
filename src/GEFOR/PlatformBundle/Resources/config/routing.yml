@@ -1,0 +1,8 @@
+gefor_platform_homepage:
+    path:     /
+    defaults: { _controller: GEFORPlatformBundle:Default:index }
+
+Inscription:
+    path:     /platform
+    defaults: { _controller: GEFORPlatformBundle:Inscription:home_view }
+
