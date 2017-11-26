@@ -11,22 +11,25 @@ use Symfony\component\HttpFoundation\Request;
 class InscriptionController extends Controller
 {
     public function home_viewAction()
-    {
+    {	
+
+
     	//Création de l'entité candidat
+    	/*
     	$candidat = new Candidat();
     	$candidat->setDate(new \DateTime("now"));
-    	$candidat->setPrenom('ali');
-    	$candidat->setNom('el kabli');
+    	$candidat->setPrenom('dupond');
+    	$candidat->setNom('jack');
     	$candidat->setNeele(new \DateTime("now"));
     	$candidat->setNationalite('france');
     	$candidat->setNumerosecu(1234);
     	$candidat->setAdresse('allée des');
     	$candidat->setCp(02210);
-    	$candidat->setVille('ali');
+    	$candidat->setVille('dupond');
     	$candidat->setTel(03000000);
     	$candidat->setPortable(0600000);
-    	$candidat->setEmail('ali');
-    	$candidat->setFamille('ali');
+    	$candidat->setEmail('Duupond');
+    	$candidat->setFamille('Dubond');
 
     	//Création de l'entité formation
     	$formation=new Formation();
@@ -50,16 +53,33 @@ class InscriptionController extends Controller
     	$em->persist($candidat);
     	$em->persist($formation);
     	$em->persist($situation);
-    	$em->flush();
+    	$em->flush();*/
 
 
         return $this->render('GEFORPlatformBundle:Inscription:home_view.html.twig');
     }
 
-    public function __construct()
+
+    public function adminAction()
     {
-    	//par defaut la date de l'annonce est la date d'haujourduit
-    	$this->date=new \Datetime();
+
+    	//on récupére les repository
+    	$em = $this->getDoctrine()->getManager();
+    	
+
+    	//on récuper les entitées correspondates
+    	$entity = $em->getRepository('GEFORPlatformBundle:Candidat')->findAll();
+    	
+
+    	 if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Survey entity.');
+        }
+
+      	    	
+    	    	
+
+    	return $this->render('GEFORPlatformBundle:Inscription:admin.html.twig', array('entity'=>$entity));
+
     }
 
 

@@ -1,0 +1,24 @@
+{% extends "GEFORPlatformBundle::layout.html.twig" %}
+
+{% block ocplatform_body %}
+
+  <h2>Tableau administrateur des inscriptions</h2>
+
+  
+       
+        	{% for a in entity %}
+            <table>
+              <tr>            
+                <td>{{ a.date|date('Y-m-d') }}</td>
+                <td>{{ a.nom }}</td>
+                {#<td>{{ a.Formations.id }}</td> : ne fonctionne pas, A REVOIR#}
+              </tr>
+            </table>
+
+            {% endfor %}
+      
+  
+      <li>Tableau administrateur des inscriptions</li>
+  </ul>
+
+{% endblock %}

@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Formation
 {   
     /**
-    * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Candidat")
+    * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Candidat",inversedBy="Formations")
     *@ORM\JoinColumn(nullable=false)
      */
     private $Candidat;

@@ -441,48 +441,5 @@ class Candidat
     {
         return $this->date;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->Formations = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add formation
-     *
-     * @param \GEFOR\PlatformBundle\Entity\Formation $formation
-     *
-     * @return Candidat
-     */
-    public function addFormation(\GEFOR\PlatformBundle\Entity\Formation $formation)
-    {
-        $this->Formations[] = $formation;
-
-        //On lie la formation au candidat
-        $formation = setCandidat($this);
-
-        return $this;
-    }
-
-    /**
-     * Remove formation
-     *
-     * @param \GEFOR\PlatformBundle\Entity\Formation $formation
-     */
-    public function removeFormation(\GEFOR\PlatformBundle\Entity\Formation $formation)
-    {
-        $this->Formations->removeElement($formation);
-    }
-
-    /**
-     * Get formations
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getFormations()
-    {
-        return $this->Formations;
-    }
 }
+

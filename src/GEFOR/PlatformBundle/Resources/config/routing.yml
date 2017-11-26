@@ -6,3 +6,7 @@ Inscription:
     path:     /platform
     defaults: { _controller: GEFORPlatformBundle:Inscription:home_view }
 
+Admin:
+    path:     /platform/admin
+    defaults: { _controller: GEFORPlatformBundle:Inscription:admin }
+
