@@ -8,17 +8,54 @@
        
         	{% for a in entity %}
             <table>
-              <tr>            
+              <tr> 
+                <td>{{ a.id }}</td>           
                 <td>{{ a.date|date('Y-m-d') }}</td>
-                <td>{{ a.nom }}</td>
-                {#<td>{{ a.Formations.id }}</td> : ne fonctionne pas, A REVOIR#}
+                <td>{{ a.prenom }}</td>
+                <td>{{ a.neele|date('Y') }}</td>
+                <td>{{ a.nationalite }}</td>
+                <td>{{ a.numerosecu }}</td>
+                <td>{{ a.adresse }}</td>
+                <td>{{ a.cp }}</td>
+
+                
+                {#<td>{{ a.Formations.type }}</td> : ne fonctionne pas, A REVOIR#}
+              </tr>
+            </table>
+
+            {% endfor %}<br /><br />
+
+            {% for a in situation %}
+            <table>
+              <tr> 
+                <td>{{ a.id }}</td>           
+                <td>{{ a.type }}</td>
+                <td>{{ a.finance }}</td>
+              
+                <td>{{ a.langue }}</td>
+                <td>{{ a.informatique }}</td>
+                <td>{{ a.motivation }}</td> 
+                <td>{{ a.Candidat.nom }}</td>
+              </tr>
+            </table>
+
+            {% endfor %}<br />
+            
+
+            {% for a in forma %}
+            <table>
+              <tr>
+                <td>{{ a.id }}</td> 
+                <td>{{ a.Candidat.nom }}</td>           
+                <td>{{ a.type }}</td>
               </tr>
             </table>
 
             {% endfor %}
-      
+
+
   
-      <li>Tableau administrateur des inscriptions</li>
+     
   </ul>
 
 {% endblock %}

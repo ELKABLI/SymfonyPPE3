@@ -119,7 +119,6 @@ class Candidat
      */
     private $famille;
 
-
     /**
      * Get id
      *
@@ -459,6 +458,7 @@ class Candidat
     public function addFormation(\GEFOR\PlatformBundle\Entity\Formation $formation)
     {
         $this->Formations[] = $formation;
+
 
         //On lie la formation au candidat
         $formation = setCandidat($this);

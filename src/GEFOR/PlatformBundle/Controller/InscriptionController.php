@@ -3,15 +3,34 @@
 namespace GEFOR\PlatformBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use GEFOR\PlatformBundle\Entity\Candidat;
 use GEFOR\PlatformBundle\Entity\Formation;
 use GEFOR\PlatformBundle\Entity\Situation;
 use Symfony\component\HttpFoundation\Request;
+use GEFOR\PlatformBundle\Form\CandidatType;
 
 class InscriptionController extends Controller
 {
-    public function home_viewAction()
+    public function home_viewAction(Request $request)
     {	
+    	$candidat = new Candidat;
+
+    	$form=$this->get('form.factory')->create(CandidatType::class, $candidat);
+
+    	if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+
+      $em = $this->getDoctrine()->getManager();
+      $em->persist($candidat);
+      $em->flush();
+
+       $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
+
+   		
+
+   		return $this->redirect($this->generateUrl('Inscription'));
+    	}
+
 
 
     	//Création de l'entité candidat
@@ -56,29 +75,45 @@ class InscriptionController extends Controller
     	$em->flush();*/
 
 
-        return $this->render('GEFORPlatformBundle:Inscription:home_view.html.twig');
+        return $this->render('GEFORPlatformBundle:Inscription:home_view.html.twig', array('form' => $form->createView(),
+        ));
     }
 
 
     public function adminAction()
     {
 
-    	//on récupére les repository
+       	//on récupére les repository
     	$em = $this->getDoctrine()->getManager();
     	
 
     	//on récuper les entitées correspondates
     	$entity = $em->getRepository('GEFORPlatformBundle:Candidat')->findAll();
+    	   	
+    	//il faut lier les candidats aux formations
+    	//$entity->addFormation();
     	
-
     	 if (!$entity) {
             throw $this->createNotFoundException('Unable to find Survey entity.');
         }
 
-      	    	
-    	    	
+        $situations = $em->getRepository('GEFORPlatformBundle:Situation')->findAll();
 
-    	return $this->render('GEFORPlatformBundle:Inscription:admin.html.twig', array('entity'=>$entity));
+      		if (!$situations) {
+            throw $this->createNotFoundException('Unable to find Survey entity.');
+        }	
+    	    	
+    	$formations = $em->getRepository('GEFORPlatformBundle:Formation')->findAll();
+
+      		if (!$formations) {
+            throw $this->createNotFoundException('Unable to find Survey entity.');
+        }	
+
+    	
+
+
+    	return $this->render('GEFORPlatformBundle:Inscription:admin.html.twig', array('entity'=>$entity, 'situation'=>$situations, 'forma'=>$formations,));
+   	
 
     }
 
