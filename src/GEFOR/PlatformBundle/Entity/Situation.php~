@@ -194,28 +194,5 @@ class Situation
     {
         return $this->motivation;
     }
-
-    /**
-     * Set candidat
-     *
-     * @param \GEFOR\PlatformBundle\Entity\Candidat $candidat
-     *
-     * @return Situation
-     */
-    public function setCandidat(\GEFOR\PlatformBundle\Entity\Candidat $candidat)
-    {
-        $this->Candidat = $candidat;
-
-        return $this;
-    }
-
-    /**
-     * Get candidat
-     *
-     * @return \GEFOR\PlatformBundle\Entity\Candidat
-     */
-    public function getCandidat()
-    {
-        return $this->Candidat;
-    }
 }
+

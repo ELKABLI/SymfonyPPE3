@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Candidat
 {
-    
+
     /**
      * @var int
      *
@@ -21,6 +21,14 @@ class Candidat
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
 
     /**
      * @var string
@@ -403,6 +411,30 @@ class Candidat
     public function getFamille()
     {
         return $this->famille;
+    }
+
+    /**
+     * Set date
+     *
+     * @param integer $date
+     *
+     * @return Candidat
+     */
+    public function setDate(\Datetime $date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return int
+     */
+    public function getDate()
+    {
+        return $this->date;
     }
 }
 
