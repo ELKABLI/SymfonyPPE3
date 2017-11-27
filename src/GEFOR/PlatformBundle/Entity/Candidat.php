@@ -13,10 +13,16 @@ use Doctrine\ORM\Mapping as ORM;
 class Candidat
 {
     /**
-     *@ORM\OneToMany(targetEntity="GEFOR\PlatformBundle\Entity\Formation", mappedBy="Candidat")
+     * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Formation", inversedBy="candidats", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $Formations;
+    private $formation;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Situation", inversedBy="candidats", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $situation;
 
     /**
      * @var int
@@ -26,7 +32,6 @@ class Candidat
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
 
     /**
      * @var \DateTime
@@ -440,49 +445,54 @@ class Candidat
     {
         return $this->date;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->Formations = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+
+
 
     /**
-     * Add formation
+     * Set formation
      *
      * @param \GEFOR\PlatformBundle\Entity\Formation $formation
      *
      * @return Candidat
      */
-    public function addFormation(\GEFOR\PlatformBundle\Entity\Formation $formation)
+    public function setFormation(\GEFOR\PlatformBundle\Entity\Formation $formation)
     {
-        $this->Formations[] = $formation;
-
-
-        //On lie la formation au candidat
-        $formation = setCandidat($this);
+        $this->formation = $formation;
 
         return $this;
     }
 
     /**
-     * Remove formation
+     * Get formation
      *
-     * @param \GEFOR\PlatformBundle\Entity\Formation $formation
+     * @return \GEFOR\PlatformBundle\Entity\Formation
      */
-    public function removeFormation(\GEFOR\PlatformBundle\Entity\Formation $formation)
+    public function getFormation()
     {
-        $this->Formations->removeElement($formation);
+        return $this->formation;
     }
 
     /**
-     * Get formations
+     * Set situation
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @param \GEFOR\PlatformBundle\Entity\Situation $situation
+     *
+     * @return Candidat
      */
-    public function getFormations()
+    public function setSituation(\GEFOR\PlatformBundle\Entity\Situation $situation)
     {
-        return $this->Formations;
+        $this->situation = $situation;
+
+        return $this;
+    }
+
+    /**
+     * Get situation
+     *
+     * @return \GEFOR\PlatformBundle\Entity\Situation
+     */
+    public function getSituation()
+    {
+        return $this->situation;
     }
 }

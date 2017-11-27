@@ -13,10 +13,16 @@ use Doctrine\ORM\Mapping as ORM;
 class Candidat
 {
     /**
-     *@ORM\OneToMany(targetEntity="GEFOR\PlatformBundle\Entity\Formation", mappedBy="Candidat")
+     * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Formation", inversedBy="candidats")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $Formations;
+    private $formation;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Situation", inversedBy="candidats")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $situation;
 
     /**
      * @var int
@@ -26,7 +32,6 @@ class Candidat
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
 
     /**
      * @var \DateTime
@@ -118,7 +123,6 @@ class Candidat
      * @ORM\Column(name="famille", type="string", length=255)
      */
     private $famille;
-
 
     /**
      * Get id
@@ -441,5 +445,6 @@ class Candidat
     {
         return $this->date;
     }
-}
 
+
+}

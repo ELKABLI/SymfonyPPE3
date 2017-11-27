@@ -13,10 +13,10 @@ use Doctrine\ORM\Mapping as ORM;
 class Formation
 {   
     /**
-    * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Candidat",inversedBy="Formations")
-    *@ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity="GEFOR\PlatformBundle\Entity\Candidat", mappedBy="formation", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $Candidat;
+    private $candidats;
 
 
 
@@ -70,28 +70,45 @@ class Formation
     {
         return $this->type;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->candidats = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
-     * Set candidat
+     * Add candidat
      *
      * @param \GEFOR\PlatformBundle\Entity\Candidat $candidat
      *
      * @return Formation
      */
-    public function setCandidat(\GEFOR\PlatformBundle\Entity\Candidat $candidat)
+    public function addCandidat(\GEFOR\PlatformBundle\Entity\Candidat $candidat)
     {
-        $this->Candidat = $candidat;
+        $this->candidats[] = $candidat;
 
         return $this;
     }
 
     /**
-     * Get candidat
+     * Remove candidat
      *
-     * @return \GEFOR\PlatformBundle\Entity\Candidat
+     * @param \GEFOR\PlatformBundle\Entity\Candidat $candidat
      */
-    public function getCandidat()
+    public function removeCandidat(\GEFOR\PlatformBundle\Entity\Candidat $candidat)
     {
-        return $this->Candidat;
+        $this->candidats->removeElement($candidat);
+    }
+
+    /**
+     * Get candidats
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCandidats()
+    {
+        return $this->candidats;
     }
 }

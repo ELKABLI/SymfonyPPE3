@@ -13,10 +13,10 @@ use Doctrine\ORM\Mapping as ORM;
 class Formation
 {   
     /**
-    * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Candidat")
-    *@ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity="GEFOR\PlatformBundle\Entity\Candidat", mappedBy="formation")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $Candidat;
+    private $candidats;
 
 
 
@@ -70,5 +70,45 @@ class Formation
     {
         return $this->type;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->candidats = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add candidat
+     *
+     * @param \GEFOR\PlatformBundle\Entity\Candidat $candidat
+     *
+     * @return Formation
+     */
+    public function addCandidat(\GEFOR\PlatformBundle\Entity\Candidat $candidat)
+    {
+        $this->candidats[] = $candidat;
+
+        return $this;
+    }
+
+    /**
+     * Remove candidat
+     *
+     * @param \GEFOR\PlatformBundle\Entity\Candidat $candidat
+     */
+    public function removeCandidat(\GEFOR\PlatformBundle\Entity\Candidat $candidat)
+    {
+        $this->candidats->removeElement($candidat);
+    }
+
+    /**
+     * Get candidats
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCandidats()
+    {
+        return $this->candidats;
+    }
+}

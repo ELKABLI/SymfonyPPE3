@@ -9,8 +9,10 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 class CandidatType extends AbstractType
 {
@@ -34,6 +36,12 @@ class CandidatType extends AbstractType
             ->add('portable',IntegerType::class)
             ->add('email',TextType::class)
             ->add('famille',TextType::class)
+            ->add('situation',SituationType::class)
+            ->add('formation',FormationType::class)
+
+            /*->add('formations', CollectionType::class,
+                array('entry_type' => FormationType::class)
+            ) */
             ->add('save', SubmitType::class)
         ;
     }

@@ -17,6 +17,7 @@
                 <td>{{ a.numerosecu }}</td>
                 <td>{{ a.adresse }}</td>
                 <td>{{ a.cp }}</td>
+                <td>{{ a.formation.type }}</td>
 
                 
                 {#<td>{{ a.Formations.type }}</td> : ne fonctionne pas, A REVOIR#}
@@ -35,7 +36,7 @@
                 <td>{{ a.langue }}</td>
                 <td>{{ a.informatique }}</td>
                 <td>{{ a.motivation }}</td> 
-                <td>{{ a.Candidat.nom }}</td>
+                
               </tr>
             </table>
 
@@ -45,9 +46,13 @@
             {% for a in forma %}
             <table>
               <tr>
-                <td>{{ a.id }}</td> 
-                <td>{{ a.Candidat.nom }}</td>           
+                <td>{{ a.id }}</td>                          
                 <td>{{ a.type }}</td>
+
+                  {% for b in a.candidats %}
+                    <td>{{ b.prenom }}</td> 
+                  {% endfor %}
+                
               </tr>
             </table>
 

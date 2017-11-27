@@ -20,17 +20,19 @@ class InscriptionController extends Controller
 
     	if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 
-      $em = $this->getDoctrine()->getManager();
-      $em->persist($candidat);
-      $em->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($candidat);
+            $em->flush();
 
-       $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
+            $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
 
    		
 
-   		return $this->redirect($this->generateUrl('Inscription'));
+   		   return $this->redirect($this->generateUrl('Inscription'));
     	}
 
+        return $this->render('GEFORPlatformBundle:Inscription:home_view.html.twig', array('form' => $form->createView(),
+        ));
 
 
     	//Création de l'entité candidat
@@ -75,8 +77,7 @@ class InscriptionController extends Controller
     	$em->flush();*/
 
 
-        return $this->render('GEFORPlatformBundle:Inscription:home_view.html.twig', array('form' => $form->createView(),
-        ));
+        
     }
 
 
@@ -109,6 +110,8 @@ class InscriptionController extends Controller
             throw $this->createNotFoundException('Unable to find Survey entity.');
         }	
 
+
+       
     	
 
 

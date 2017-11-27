@@ -14,10 +14,10 @@ class Situation
 {   
 
     /**
-     * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Candidat")
-     *@ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity="GEFOR\PlatformBundle\Entity\Candidat", mappedBy="situation", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $Candidat;
+    private $candidats;
 
 
     /**
@@ -204,7 +204,7 @@ class Situation
      */
     public function setCandidat(\GEFOR\PlatformBundle\Entity\Candidat $candidat)
     {
-        $this->Candidat = $candidat;
+        $this->candidat = $candidat;
 
         return $this;
     }
@@ -216,6 +216,47 @@ class Situation
      */
     public function getCandidat()
     {
-        return $this->Candidat;
+        return $this->candidat;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->candidats = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add candidat
+     *
+     * @param \GEFOR\PlatformBundle\Entity\Candidat $candidat
+     *
+     * @return Situation
+     */
+    public function addCandidat(\GEFOR\PlatformBundle\Entity\Candidat $candidat)
+    {
+        $this->candidats[] = $candidat;
+
+        return $this;
+    }
+
+    /**
+     * Remove candidat
+     *
+     * @param \GEFOR\PlatformBundle\Entity\Candidat $candidat
+     */
+    public function removeCandidat(\GEFOR\PlatformBundle\Entity\Candidat $candidat)
+    {
+        $this->candidats->removeElement($candidat);
+    }
+
+    /**
+     * Get candidats
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCandidats()
+    {
+        return $this->candidats;
     }
 }
