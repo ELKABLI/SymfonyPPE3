@@ -3,30 +3,77 @@
 {% block ocplatform_body %}
 
   <h2>Tableau administrateur des inscriptions</h2>
-
-  
+              <table>
+              <tr>
+                
+                <th>{{ 'Date' }}</th>
+                <th>{{ 'prénom' }}</th>
+                <th>{{ 'Nationalité' }}</th>
+                <th>{{ 'Adresse' }}</th>
+                <th>{{ 'Cp' }}</th>
+                <th>{{ 'Projet' }}</th>
+                <th>{{ 'Situation' }}</th>
+                
+              </tr>
+              <table>
        
         	{% for a in entity %}
             <table>
+                        
               <tr> 
-                <td>{{ a.id }}</td>           
+                {#<td>{{ a.id }}</td>#}           
                 <td>{{ a.date|date('Y-m-d') }}</td>
                 <td>{{ a.prenom }}</td>
-                <td>{{ a.neele|date('Y') }}</td>
+                {#<td>{{ a.neele|date('Y') }}</td>#}
                 <td>{{ a.nationalite }}</td>
-                <td>{{ a.numerosecu }}</td>
+                {#<td>{{ a.numerosecu }}</td>#}
                 <td>{{ a.adresse }}</td>
                 <td>{{ a.cp }}</td>
-                <td>{{ a.formation.type }}</td>
-
-                
-                {#<td>{{ a.Formations.type }}</td> : ne fonctionne pas, A REVOIR#}
+                <td>{{ a.Formation.type }}</td>
+                <td>{{ a.Situation.type }}</td>
               </tr>
             </table>
 
             {% endfor %}<br /><br />
+<h3>Affichage par projet souhaité</h3>
 
-            {% for a in situation %}
+{% for a in filtre %}
+
+            <table>
+              <tr>
+                
+                <th>{{ 'Date' }}</th>
+                <th>{{ 'prénom' }}</th>
+                <th>{{ 'Nationalité' }}</th>
+                <th>{{ 'Adresse' }}</th>
+                <th>{{ 'Cp' }}</th>
+                <th>{{ 'Projet' }}</th>
+                <th>{{ 'Situation' }}</th>
+                
+              </tr>
+              <table>
+              <table>
+                        
+              <tr> 
+                {#<td>{{ a.id }}</td>#}           
+                <td>{{ a.date|date('Y-m-d') }}</td>
+                <td>{{ a.prenom }}</td>
+                {#<td>{{ a.neele|date('Y') }}</td>#}
+                <td>{{ a.nationalite }}</td>
+                {#<td>{{ a.numerosecu }}</td>#}
+                <td>{{ a.adresse }}</td>
+                <td>{{ a.cp }}</td>
+                <td>{{ a.Formation.type }}</td>
+                <td>{{ a.Situation.type }}</td>
+              </tr>
+            </table>
+
+{% endfor %}<br /><br />
+
+
+
+
+{#            {% for a in situation %}
             <table>
               <tr> 
                 <td>{{ a.id }}</td>           
@@ -40,23 +87,28 @@
               </tr>
             </table>
 
-            {% endfor %}<br />
-            
+            {% endfor %}<br />#}
 
-            {% for a in forma %}
+            {% for a in formation %}
+              {{ loop.index }}
             <table>
-              <tr>
-                <td>{{ a.id }}</td>                          
-                <td>{{ a.type }}</td>
-
-                  {% for b in a.candidats %}
-                    <td>{{ b.prenom }}</td> 
-                  {% endfor %}
                 
+                  
+                  {% for b in a.candidats %}
+                    
+                  <tr>
+                    <td>{{ a.type }}</td>
+                    <td>{{ b.prenom }}</td>
+                  </tr>
+                  {% endfor %}
+
+               
               </tr>
             </table>
-
             {% endfor %}
+
+          
+
 
 
   

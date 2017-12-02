@@ -9,4 +9,3 @@ Inscription:
 Admin:
     path:     /platform/admin
     defaults: { _controller: GEFORPlatformBundle:Inscription:admin }
-

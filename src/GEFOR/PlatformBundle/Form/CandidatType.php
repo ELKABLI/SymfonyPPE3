@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -31,13 +33,16 @@ class CandidatType extends AbstractType
             ->add('numerosecu', IntegerType::class)
             ->add('adresse', TextType::class)
             ->add('cp', IntegerType::class)
-            ->add('ville', IntegerType::class)
+            ->add('ville', TextType::class)
             ->add('tel', IntegerType::class)
             ->add('portable',IntegerType::class)
             ->add('email',TextType::class)
             ->add('famille',TextType::class)
             ->add('situation',SituationType::class)
-            ->add('formation',FormationType::class)
+            ->add('formation',EntityType::class, array(
+                'class' => 'GEFOR\PlatformBundle\Entity\Formation',
+                'choice_label' => 'type'
+            ))
 
             /*->add('formations', CollectionType::class,
                 array('entry_type' => FormationType::class)

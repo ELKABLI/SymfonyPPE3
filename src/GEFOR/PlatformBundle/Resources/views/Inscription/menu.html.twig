@@ -1,0 +1,12 @@
+
+{% for a in list %}
+  
+            <table>        
+              <tr>          
+                <td>{{ a.date|date('Y-m-d') }}</td>
+                <td>{{ a.prenom }}</td>
+              </tr>
+            </table>
+  
+{% endfor %}
+</ul>

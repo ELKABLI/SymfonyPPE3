@@ -4,7 +4,6 @@ namespace GEFOR\PlatformBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SituationType extends AbstractType
@@ -14,13 +13,7 @@ class SituationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('type', TextType::class)
-            ->add('finance', TextType::class)
-            ->add('langue', TextType::class)
-            ->add('informatique', TextType::class)
-            ->add('motivation', TextType::class)         
-        ;
+        $builder->add('type', TextType::class)->add('finance', TextType::class)->add('langue', TextType::class)->add('informatique', TextType::class)->add('motivation', TextType::class);
     }
     
     /**
@@ -33,11 +26,13 @@ class SituationType extends AbstractType
         ));
     }
 
-     /**
+    /**
      * {@inheritdoc}
      */
     public function getBlockPrefix()
     {
         return 'gefor_platformbundle_situation';
     }
+
+
 }

@@ -1,3 +1,11 @@
+gefor_platform_formation:
+    resource: "@GEFORPlatformBundle/Controller/FormationController.php"
+    type:     annotation
+
+gefor_platform_situation:
+    resource: "@GEFORPlatformBundle/Controller/SituationController.php"
+    type:     annotation
+
 gefor_platform:
     resource: "@GEFORPlatformBundle/Resources/config/routing.yml"
     prefix:   /
@@ -5,3 +13,5 @@ gefor_platform:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+   

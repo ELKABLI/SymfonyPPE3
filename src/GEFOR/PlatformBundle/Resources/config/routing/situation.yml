@@ -1,0 +1,24 @@
+situation_index:
+    path:     /
+    defaults: { _controller: "GEFORPlatformBundle:Situation:index" }
+    methods:  GET
+
+situation_show:
+    path:     /{id}/show
+    defaults: { _controller: "GEFORPlatformBundle:Situation:show" }
+    methods:  GET
+
+situation_new:
+    path:     /new
+    defaults: { _controller: "GEFORPlatformBundle:Situation:new" }
+    methods:  [GET, POST]
+
+situation_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "GEFORPlatformBundle:Situation:edit" }
+    methods:  [GET, POST]
+
+situation_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "GEFORPlatformBundle:Situation:delete" }
+    methods:  DELETE
