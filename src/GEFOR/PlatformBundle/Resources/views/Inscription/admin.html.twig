@@ -5,37 +5,61 @@
   <h2>Tableau administrateur des inscriptions</h2>
               <table>
               <tr>
-                
+                <th>Id</th>
                 <th>{{ 'Date' }}</th>
-                <th>{{ 'prénom' }}</th>
-                <th>{{ 'Nationalité' }}</th>
-                <th>{{ 'Adresse' }}</th>
-                <th>{{ 'Cp' }}</th>
                 <th>{{ 'Projet' }}</th>
+                <th>{{ 'nom' }}</th>
+                <th>{{ 'prénom' }}</th>
+                <th>{{ 'Adresse' }}</th>
+                <th>{{ 'Cp' }}</th>   
                 <th>{{ 'Situation' }}</th>
+                <th>{{ 'Action' }}</th>
                 
               </tr>
               <table>
        
-        	{% for a in entity %}
+        	{% for a in candidat %}
             <table>
                         
               <tr> 
-                {#<td>{{ a.id }}</td>#}           
-                <td>{{ a.date|date('Y-m-d') }}</td>
+                <td><a href="{{ path('Inscription_show', { 'id': a.id }) }}">{{ a.id }}</a></td>      
+                <td>{{ a.date|date('d-m-Y') }}</td>
+                <td>{{ a.Formation.type }}</td>
+                <td>{{ a.nom }}</td>
                 <td>{{ a.prenom }}</td>
-                {#<td>{{ a.neele|date('Y') }}</td>#}
-                <td>{{ a.nationalite }}</td>
+                {#<td>{{ a.neele|date('Y') }}</td>#}  
                 {#<td>{{ a.numerosecu }}</td>#}
                 <td>{{ a.adresse }}</td>
-                <td>{{ a.cp }}</td>
-                <td>{{ a.Formation.type }}</td>
+                <td>{{ a.cp }}</td>  
                 <td>{{ a.Situation.type }}</td>
+                <td>
+                  <li>
+                  <a href="{{ path('Inscription_show', { 'id': a.id }) }}">{{ 'edit' }}</a>
+                  </li>
+                  <li>
+                  <a href="{{ path('Inscription_show', { 'id': a.id }) }}">{{ 'delete' }}</a>
+                  </li>
+                </td> 
               </tr>
             </table>
 
-            {% endfor %}<br /><br />
+            {% endfor %}
+
+    <div class="conteneur">
+    <div id="div_chartg1"></div>
+    <div id="div_chartg2"></div>
+    </div>
+    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+    <script type="text/javascript">
+        {{ gc_draw(piechartg1, 'div_chartg1') }}
+        {{ gc_draw(piechartg2, 'div_chartg2') }}
+    </script>
+    
+
 <h3>Affichage par projet souhaité</h3>
+{#
 
 {% for a in filtre %}
 
@@ -55,12 +79,13 @@
               <table>
                         
               <tr> 
-                {#<td>{{ a.id }}</td>#}           
+
+                {#<td>{{ a.id }}</td>           
                 <td>{{ a.date|date('Y-m-d') }}</td>
                 <td>{{ a.prenom }}</td>
-                {#<td>{{ a.neele|date('Y') }}</td>#}
+                {#<td>{{ a.neele|date('Y') }}</td>
                 <td>{{ a.nationalite }}</td>
-                {#<td>{{ a.numerosecu }}</td>#}
+                {#<td>{{ a.numerosecu }}</td>
                 <td>{{ a.adresse }}</td>
                 <td>{{ a.cp }}</td>
                 <td>{{ a.Formation.type }}</td>
@@ -68,7 +93,7 @@
               </tr>
             </table>
 
-{% endfor %}<br /><br />
+{% endfor %}<br /><br />#}
 
 
 
@@ -90,29 +115,48 @@
             {% endfor %}<br />#}
 
             {% for a in formation %}
-              {{ loop.index }}
-            <table>
-                
-                  
-                  {% for b in a.candidats %}
-                    
-                  <tr>
-                    <td>{{ a.type }}</td>
-                    <td>{{ b.prenom }}</td>
-                  </tr>
-                  {% endfor %}
-
-               
+             
+        
+              <table>
+                <div class="ligne"> {{ loop.index~"  "~a.type }} </div>
+              <table>
+              <tr>
+                <th>{{ 'Date' }}</th>
+                <th>{{ 'Projet' }}</th>
+                <th>{{ 'Nom' }}</th>
+                <th>{{ 'Prénom' }}</th>
+                <th>{{ 'Adresse' }}</th>
+                <th>{{ 'Cp' }}</th>
+                <th>{{ 'Situation' }}</th>
               </tr>
-            </table>
+              <table>
+                {% for b in a.candidats %}
+
+                  
+                <table>
+                    <tr>
+                          <td>{{ b.date|date('d-m-Y') }}</td>
+                          <td>{{ a.type }}</td>
+                          <td>{{ b.nom }}</td>
+                          <td>{{ b.prenom }}</td>
+                          <td>{{ b.adresse }}</td>
+                          <td>{{ b.cp }}</td>
+                          <td>{{ b.situation.type }}</td>
+                            
+                    </tr>
+              </table>
+
+
             {% endfor %}
 
-          
+              {% if loop.index <4 %}
+              <div id="div_chart_loop{{loop.index}}"  ></div>
 
-
-
-  
-     
-  </ul>
-
+              <script type="text/javascript">
+                        {{ gc_draw(piechart[loop.index], 'div_chart_loop' ~ loop.index) }}
+              </script> 
+              {% endif %}  
+              
+        {% endfor %}
 {% endblock %}
+

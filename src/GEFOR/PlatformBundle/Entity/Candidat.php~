@@ -13,13 +13,22 @@ use Doctrine\ORM\Mapping as ORM;
 class Candidat
 {
     /**
-     * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Formation", inversedBy="candidats")
+     * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Agenda", inversedBy="candidats", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * 
+     */
+    private $agenda;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Formation", inversedBy="candidats", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     * 
      */
     private $formation;
 
     /**
-     * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Situation", inversedBy="candidats")
+     * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Situation", inversedBy="candidats", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $situation;
@@ -447,4 +456,52 @@ class Candidat
     }
 
 
+
+    /**
+     * Set formation
+     *
+     * @param \GEFOR\PlatformBundle\Entity\Formation $formation
+     *
+     * @return Candidat
+     */
+    public function setFormation(\GEFOR\PlatformBundle\Entity\Formation $formation)
+    {
+        $this->formation = $formation;
+
+        return $this;
+    }
+
+    /**
+     * Get formation
+     *
+     * @return \GEFOR\PlatformBundle\Entity\Formation
+     */
+    public function getFormation()
+    {
+        return $this->formation;
+    }
+
+    /**
+     * Set situation
+     *
+     * @param \GEFOR\PlatformBundle\Entity\Situation $situation
+     *
+     * @return Candidat
+     */
+    public function setSituation(\GEFOR\PlatformBundle\Entity\Situation $situation)
+    {
+        $this->situation = $situation;
+
+        return $this;
+    }
+
+    /**
+     * Get situation
+     *
+     * @return \GEFOR\PlatformBundle\Entity\Situation
+     */
+    public function getSituation()
+    {
+        return $this->situation;
+    }
 }

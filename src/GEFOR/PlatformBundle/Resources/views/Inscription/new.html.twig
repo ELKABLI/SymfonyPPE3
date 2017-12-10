@@ -1,0 +1,24 @@
+{% extends "GEFORPlatformBundle::layout.html.twig" %}
+
+{% block ocplatform_body %}
+
+ {% for message in app.session.flashbag.get('notice') %}
+
+        <p>Message flash : {{ message }}</p>
+
+  {% endfor %}
+
+
+            <table>
+                        
+              <tr> 
+                {#<td>{{ a.id }}</td>#}           
+                <td>{{ candidat.nom }}</td>
+                <td>{{ candidat.prenom }}</td>
+                
+              </tr>
+            </table>
+
+
+
+{% endblock %}

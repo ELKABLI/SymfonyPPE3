@@ -1,27 +1,27 @@
-{% extends "GEFORPlatformBundle::layout.html.twig" %}
+{% extends 'base.html.twig' %}
 
-{% block body %}{{ parent() }}
-    <h1>Formation</h1>
+{% block body %}
+    <h1>Agenda</h1>
 
     <table>
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ formation.id }}</td>
+                <td>{{ agenda.id }}</td>
             </tr>
             <tr>
-                <th>Type</th>
-                <td>{{ formation.type }}</td>
+                <th>Date</th>
+                <td>{% if agenda.date %}{{ agenda.date|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
         </tbody>
     </table>
 
     <ul>
         <li>
-            <a href="{{ path('formation_index') }}">Back to the list</a>
+            <a href="{{ path('agenda_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('formation_edit', { 'id': formation.id }) }}">Edit</a>
+            <a href="{{ path('agenda_edit', { 'id': agenda.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

@@ -13,13 +13,22 @@ use Doctrine\ORM\Mapping as ORM;
 class Candidat
 {
     /**
+     * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Agenda", inversedBy="candidats", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     * 
+     */
+    private $agenda;
+
+
+    /**
      * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Formation", inversedBy="candidats", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * 
      */
     private $formation;
 
     /**
-     * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Situation", inversedBy="candidats", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Situation", inversedBy="candidats", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $situation;
@@ -55,7 +64,7 @@ class Candidat
     private $nom;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
      * @ORM\Column(name="neele", type="date")
      */
@@ -71,7 +80,8 @@ class Candidat
     /**
      * @var int
      *
-     * @ORM\Column(name="numerosecu", type="integer")
+     * @ORM\Column(name="numerosecu", type="integer", nullable = true)
+     * 
      */
     private $numerosecu;
 
@@ -494,5 +504,29 @@ class Candidat
     public function getSituation()
     {
         return $this->situation;
+    }
+
+    /**
+     * Set agenda
+     *
+     * @param \GEFOR\PlatformBundle\Entity\Agenda $agenda
+     *
+     * @return Candidat
+     */
+    public function setAgenda(\GEFOR\PlatformBundle\Entity\Agenda $agenda)
+    {
+        $this->agenda = $agenda;
+
+        return $this;
+    }
+
+    /**
+     * Get agenda
+     *
+     * @return \GEFOR\PlatformBundle\Entity\Agenda
+     */
+    public function getAgenda()
+    {
+        return $this->agenda;
     }
 }

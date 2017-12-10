@@ -5,6 +5,7 @@ namespace GEFOR\PlatformBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -28,9 +29,9 @@ class CandidatType extends AbstractType
             ->add('date', DateTimeType::class)
             ->add('prenom', TextType::class)
             ->add('nom', TextType::class)
-            ->add('neele', DateTimeType::class)
+            ->add('neele', DateType::class, array('label'=>'Date de naissance'))
             ->add('nationalite', TextType::class)
-            ->add('numerosecu', IntegerType::class)
+            //->add('numerosecu', IntegerType::class)
             ->add('adresse', TextType::class)
             ->add('cp', IntegerType::class)
             ->add('ville', TextType::class)
@@ -43,6 +44,14 @@ class CandidatType extends AbstractType
                 'class' => 'GEFOR\PlatformBundle\Entity\Formation',
                 'choice_label' => 'type'
             ))
+
+            ->add('agenda',AgendaType::class)
+            /*->add('agenda',EntityType::class, array(
+                'class' => 'GEFOR\PlatformBundle\Entity\Agenda',
+                'choice_label' => 'date'
+            ))*/
+
+
 
             /*->add('formations', CollectionType::class,
                 array('entry_type' => FormationType::class)

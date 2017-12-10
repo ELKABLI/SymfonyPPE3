@@ -2,18 +2,19 @@
 
 namespace GEFOR\PlatformBundle\Controller;
 
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use GEFOR\PlatformBundle\Entity\Candidat;
 use GEFOR\PlatformBundle\Form\CandidatType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\component\HttpFoundation\Request;
 
+class InscriptionController extends Controller
+{
 
-class InscriptionController extends Controller{
-
-    public function home_viewAction(Request $request)
+    public function indexAction(Request $request)
     {
         $candidat = new Candidat;
-
+        $candidat->setDate(new \Datetime());
         $form = $this->get('form.factory')->create(CandidatType::class, $candidat);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
@@ -24,50 +25,17 @@ class InscriptionController extends Controller{
 
             $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
 
-            return $this->redirect($this->generateUrl('Inscription'));
+            return $this->redirectToRoute('Inscription_new', array('id' => $candidat->getId(), 'sms' => $request)); // on transmet au controlleur newAction l'annonce unique caractérisé par son id du new candidat, new action récuper cette objet et le transmet a sa vu.
         }
 
-        return $this->render('GEFORPlatformBundle:Inscription:home_view.html.twig', array('form' => $form->createView(),));
-       
-        //Création de l'entité candidat
-        /*
-        $candidat = new Candidat();
-        $candidat->setDate(new \DateTime("now"));
-        $candidat->setPrenom('dupond');
-        $candidat->setNom('jack');
-        $candidat->setNeele(new \DateTime("now"));
-        $candidat->setNationalite('france');
-        $candidat->setNumerosecu(1234);
-        $candidat->setAdresse('allée des');
-        $candidat->setCp(02210);
-        $candidat->setVille('dupond');
-        $candidat->setTel(03000000);
-        $candidat->setPortable(0600000);
-        $candidat->setEmail('Duupond');
-        $candidat->setFamille('Dubond');
-    
-        //Création de l'entité formation
-        $formation=new Formation();
-        $formation->setType('bts SIO');
+        return $this->render('GEFORPlatformBundle:Inscription:index.html.twig', array('form' => $form->createView()));
 
-        //Création de l'entité
-        $situation=new Situation();
-        $situation->setType('marié');
-        $situation->setFinance('cif');
-        $situation->setLangue('marié');
-        $situation->setInformatique('marié');
-        $situation->setMotivation('marié');
-    
-        // on lie formation et situation au candidat
-        $formation->setCandidat($candidat);
-        $situation->setCandidat($candidat);
-        //on recupére le gestionnaire d'entités
-        $em = $this->getDoctrine()->getManager();
-        // 1) persistance de l'entité
-        $em->persist($candidat);
-        $em->persist($formation);
-        $em->persist($situation);
-        $em->flush();*/
+    }
+
+    public function newAction(Candidat $candidat)
+    {
+
+        return $this->render('GEFORPlatformBundle:Inscription:new.html.twig', array('candidat' => $candidat));
 
     }
 
@@ -78,12 +46,12 @@ class InscriptionController extends Controller{
         $em = $this->getDoctrine()->getManager();
 
         //on récuper les entitées correspondates
-        $entity = $em->getRepository('GEFORPlatformBundle:Candidat')->findAll();
+        $candidat = $em->getRepository('GEFORPlatformBundle:Candidat')->findAll();
 
         //il faut lier les candidats aux formations
         //$entity->addFormation();
 
-        if (!$entity) {
+        if (!$candidat) {
             throw $this->createNotFoundException('Unable to find Survey entity.');
         }
 
@@ -93,40 +61,361 @@ class InscriptionController extends Controller{
             throw $this->createNotFoundException('Unable to find Survey entity.');
         }
 
-
         //on récupére les repository
-        
-        $em    = $this->getDoctrine()->getManager();
+
+        /*
         $query = $em->createQueryBuilder()
-            ->select('candidats, formation, situation') //ici on met les clefs primaires
-            ->from('GEFORPlatformBundle:Candidat', 'candidats') //on donne un alias à l'entité Candidat
-            ->join('candidats.formation', 'formation') // (attribut sur lequel on fait la jointure deouis Candidat, alias)
-            ->join('candidats.situation', 'situation')
-            ->where('formation.type = :type')
-            ->setParameter(':type', 'CG');
+        ->select('candidats, formation, situation') //ici on met les clefs primaires
+        ->from('GEFORPlatformBundle:Candidat', 'candidats') //on donne un alias à l'entité Candidat
+        ->join('candidats.formation', 'formation') // (attribut sur lequel on fait la jointure deouis Candidat, alias)
+        ->join('candidats.situation', 'situation')
+        ->where('formation.type = :type')
+        ->setParameter(':type', 'CG');
 
         $filtre = $query
-            ->getQuery()
-            ->getResult();
+        ->getQuery()
+        ->getResult();*/
 
-        $em    = $this->getDoctrine()->getManager();
         $query = $em->createQueryBuilder()
             ->select('formation, candidats') //ici on met les clefs primaires
             ->from('GEFORPlatformBundle:Formation', 'formation') //on donne un alias à l'entité Candidat
+
             ->join('formation.candidats', 'candidats'); // (attribut sur lequel on fait la jointure depuis Candidat, alias)
-
-            
-
         $formations = $query
             ->getQuery()
             ->getResult();
 
+//requette pour la récuperation de données pour les graph fonction des type de Projet (Bts SLAM SISR BANQUE)
+        $query = $em->createQueryBuilder()
+            ->select('candidats, formation') //ici on met les clefs primaires
+            ->from('GEFORPlatformBundle:Candidat', 'candidats') //on donne un alias à l'entité Formation
 
+            ->join('candidats.formation', 'formation') // (on joint formation et candidats)
+            ->where('formation.type = :type')
+            ->setParameter(':type', 'BTS SIO SLAM');
 
+        $typesio = $query
+            ->getQuery()
+            ->getResult();
 
+        $query = $em->createQueryBuilder()
+            ->select('candidats, formation') //ici on met les clefs primaires
+            ->from('GEFORPlatformBundle:Candidat', 'candidats') //on donne un alias à l'entité Formation
 
-        return $this->render('GEFORPlatformBundle:Inscription:admin.html.twig', array('entity' => $entity, 'situation' => $situations,'formation' => $formations, 'filtre' => $filtre));
+            ->join('candidats.formation', 'formation') // (on joint formation et candidats)
+            ->where('formation.type = :type')
+            ->setParameter(':type', 'BTS SIO SISR');
 
+        $typesisr = $query
+            ->getQuery()
+            ->getResult();
+
+        $query = $em->createQueryBuilder()
+            ->select('candidats, formation') //ici on met les clefs primaires
+            ->from('GEFORPlatformBundle:Candidat', 'candidats') //on donne un alias à l'entité Formation
+
+            ->join('candidats.formation', 'formation') // (on joint formation et candidats)
+            ->where('formation.type = :type')
+            ->setParameter(':type', 'BTS BANQUE');
+
+//requette pour la récuperation de données pour les graph fonction des type de situation (CIF CDI CDD)
+
+        $typebanque = $query
+            ->getQuery()
+            ->getResult();
+
+        $query = $em->createQueryBuilder()
+            ->select('candidats, situation') //ici on met les clefs primaires
+            ->from('GEFORPlatformBundle:Candidat', 'candidats') //on donne un alias à l'entité Formation
+
+            ->join('candidats.situation', 'situation') // (on joint formation et candidats)
+            ->where('situation.type = :type')
+            ->setParameter(':type', 'CDI');
+
+        $situationcdi = $query
+            ->getQuery()
+            ->getResult();
+
+        $query = $em->createQueryBuilder()
+            ->select('candidats, situation') //ici on met les clefs primaires
+            ->from('GEFORPlatformBundle:Candidat', 'candidats') //on donne un alias à l'entité Formation
+
+            ->join('candidats.situation', 'situation') // (on joint formation et candidats)
+            ->where('situation.type = :type')
+            ->setParameter(':type', 'CDD');
+
+        $situationcdd = $query
+            ->getQuery()
+            ->getResult();
+
+        $query = $em->createQueryBuilder()
+            ->select('candidats, situation') //ici on met les clefs primaires
+            ->from('GEFORPlatformBundle:Candidat', 'candidats') //on donne un alias à l'entité Formation
+
+            ->join('candidats.situation', 'situation') // (on joint formation et candidats)
+            ->where('situation.type = :type')
+            ->setParameter(':type', 'pôle emploi');
+
+        $situationpe = $query
+            ->getQuery()
+            ->getResult();
+
+// les 2 premiers graph sur le tabelau générale
+
+        $pieChartg1 = new PieChart();
+        $pieChartg1->getData()->setArrayToDataTable(
+            [['Task', 'Hours per Day'],
+                ['BTS SIO SLAM', count($typesio)],
+                ['BTS SIO SISR', count($typesisr)],
+                ['BTS BANQUE', count($typebanque)],
+            ]
+        );
+        $pieChartg1 = $this->optiongraph($pieChartg1);
+        $pieChartg1->getOptions()->setTitle('Projets souhaités');
+        $pieChartg1->getOptions()->setHeight(300);
+        $pieChartg1->getOptions()->setWidth(400);
+
+        $pieChartg2 = new PieChart();
+        $pieChartg2->getData()->setArrayToDataTable(
+            [['Task', 'Hours per Day'],
+                ['CDI', count($situationcdi)],
+                ['CDD', count($situationcdd)],
+                ['pôle emploi', count($situationpe)],
+            ]
+        );
+        $pieChartg2 = $this->optiongraph($pieChartg2);
+        $pieChartg2->getOptions()->setTitle('Situation des candidats');
+        $pieChartg2->getOptions()->setHeight(300);
+        $pieChartg2->getOptions()->setWidth(400);
+
+        //requette pour la récuperation de données pour les graph par Projet situation et age(Bts SLAM SISR BANQUE)
+
+        $query = $em->createQueryBuilder()
+            ->select('candidats, formation, situation')
+            ->from('GEFORPlatformBundle:Candidat', 'candidats')
+            ->join('candidats.formation', 'formation')
+            ->join('candidats.situation', 'situation')
+            ->where('formation.type = :forma')
+            ->andwhere('situation.type = :situ')
+            ->setParameter(':forma', 'BTS SIO SLAM')
+            ->setParameter(':situ', 'CDI');
+
+        $slam_cdi = $query
+            ->getQuery()
+            ->getResult();
+
+        $query = $em->createQueryBuilder()
+            ->select('candidats, formation, situation')
+            ->from('GEFORPlatformBundle:Candidat', 'candidats')
+            ->join('candidats.formation', 'formation')
+            ->join('candidats.situation', 'situation')
+            ->where('formation.type = :forma')
+            ->andwhere('situation.type = :situ')
+            ->setParameter(':forma', 'BTS SIO SLAM')
+            ->setParameter(':situ', 'CDD');
+
+        $slam_cdd = $query
+            ->getQuery()
+            ->getResult();
+
+        $query = $em->createQueryBuilder()
+            ->select('candidats, formation, situation')
+            ->from('GEFORPlatformBundle:Candidat', 'candidats')
+            ->join('candidats.formation', 'formation')
+            ->join('candidats.situation', 'situation')
+            ->where('formation.type = :forma')
+            ->andwhere('situation.type = :situ')
+            ->setParameter(':forma', 'BTS SIO SLAM')
+            ->setParameter(':situ', 'pôle emploi');
+
+        $slam_pe = $query
+            ->getQuery()
+            ->getResult();
+
+        $pieChart[1] = new PieChart();
+        $pieChart[1]->getData()->setArrayToDataTable(
+            [['Task', 'Hours per Day'],
+                ['CDI', count($slam_cdi)],
+                ['CDD', count($slam_cdd)],
+                ['pôle emploi', count($slam_pe)],
+            ]
+        );
+        $pieChart[1] = $this->optiongraph($pieChart[1]);
+        $pieChart[1]->getOptions()->setTitle('Situation des candidats');
+
+        $query = $em->createQueryBuilder()
+            ->select('candidats, formation, situation')
+            ->from('GEFORPlatformBundle:Candidat', 'candidats')
+            ->join('candidats.formation', 'formation')
+            ->join('candidats.situation', 'situation')
+            ->where('formation.type = :forma')
+            ->andwhere('situation.type = :situ')
+            ->setParameter(':forma', 'BTS SIO SISR')
+            ->setParameter(':situ', 'CDI');
+
+        $sisr_cdi = $query
+            ->getQuery()
+            ->getResult();
+
+        $query = $em->createQueryBuilder()
+            ->select('candidats, formation, situation')
+            ->from('GEFORPlatformBundle:Candidat', 'candidats')
+            ->join('candidats.formation', 'formation')
+            ->join('candidats.situation', 'situation')
+            ->where('formation.type = :forma')
+            ->andwhere('situation.type = :situ')
+            ->setParameter(':forma', 'BTS SIO SISR')
+            ->setParameter(':situ', 'CDD');
+
+        $sisr_cdd = $query
+            ->getQuery()
+            ->getResult();
+
+        $query = $em->createQueryBuilder()
+            ->select('candidats, formation, situation')
+            ->from('GEFORPlatformBundle:Candidat', 'candidats')
+            ->join('candidats.formation', 'formation')
+            ->join('candidats.situation', 'situation')
+            ->where('formation.type = :forma')
+            ->andwhere('situation.type = :situ')
+            ->setParameter(':forma', 'BTS SIO SISR')
+            ->setParameter(':situ', 'pôle emploi');
+
+        $sisr_pe = $query
+            ->getQuery()
+            ->getResult();
+
+        $pieChart[2] = new PieChart();
+        $pieChart[2]->getData()->setArrayToDataTable(
+            [['Task', 'Hours per Day'],
+                ['CDI', count($sisr_cdi)],
+                ['CDD', count($sisr_cdd)],
+                ['pôle emploi', count($sisr_pe)],
+            ]
+        );
+        $pieChart[2] = $this->optiongraph($pieChart[2]);
+        $pieChart[2]->getOptions()->setTitle('Situation des candidats');
+
+//banque stat
+
+        $banque_cdi = $query
+            ->getQuery()
+            ->getResult();
+
+        $query = $em->createQueryBuilder()
+            ->select('candidats, formation, situation')
+            ->from('GEFORPlatformBundle:Candidat', 'candidats')
+            ->join('candidats.formation', 'formation')
+            ->join('candidats.situation', 'situation')
+            ->where('formation.type = :forma')
+            ->andwhere('situation.type = :situ')
+            ->setParameter(':forma', 'BTS BANQUE')
+            ->setParameter(':situ', 'CDD');
+
+        $banque_cdd = $query
+            ->getQuery()
+            ->getResult();
+
+        $query = $em->createQueryBuilder()
+            ->select('candidats, formation, situation')
+            ->from('GEFORPlatformBundle:Candidat', 'candidats')
+            ->join('candidats.formation', 'formation')
+            ->join('candidats.situation', 'situation')
+            ->where('formation.type = :forma')
+            ->andwhere('situation.type = :situ')
+            ->setParameter(':forma', 'BTS BANQUE')
+            ->setParameter(':situ', 'pôle emploi');
+
+        $banque_pe = $query
+            ->getQuery()
+            ->getResult();
+
+        $pieChart[3] = new PieChart();
+        $pieChart[3]->getData()->setArrayToDataTable(
+            [['Task', 'Hours per Day'],
+                ['CDI', count($banque_cdi)],
+                ['CDD', count($banque_cdd)],
+                ['pôle emploi', count($banque_pe)],
+            ]
+        );
+        $pieChart[3] = $this->optiongraph($pieChart[3]);
+        $pieChart[3]->getOptions()->setTitle('Situation des situations banque');
+
+        return $this->render('GEFORPlatformBundle:Inscription:admin.html.twig', array('candidat' => $candidat, 'situation' => $situations, 'formation' => $formations, 'piechartg1' => $pieChartg1, 'piechartg2' => $pieChartg2, 'piechart' => $pieChart));
+
+        return $this->redirectToRoute('Inscription_show', array('candidat' => $candidat)); // on transmet au controlleur showAction les candidats, showAction récuper ces objets et les transmets a sa vu.
+
+        
+
+    }
+
+    public function editAction(Request $request, Candidat $candidat)
+    {
+        $deleteForm = $this->createDeleteForm($candidat);
+        $editForm = $this->createForm('GEFOR\PlatformBundle\Form\CandidatType', $candidat);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('Inscription_edit', array('id' => $candidat->getId()));
+        }
+
+        return $this->render('GEFORPlatformBundle:Inscription:edit.html.twig', array(
+            'candidat' => $candidat,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    public function showAction(Candidat $candidat)
+    {
+
+        $deleteForm = $this->createDeleteForm($candidat);
+
+        return $this->render('GEFORPlatformBundle:Inscription:show.html.twig', array(
+            'candidat'    => $candidat,
+            'delete_form' => $deleteForm->createView(),
+        ));
+
+    }
+
+    private function createDeleteForm(Candidat $candidat)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('Inscription_delete', array('id' => $candidat->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+        ;
+    }
+
+    public function deleteAction(Request $request, Candidat $candidat)
+    {
+        $form = $this->createDeleteForm($candidat);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($candidat);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('Admin');
+    }
+
+    private function optiongraph($option)
+    {
+
+        $option->getOptions()->setIs3D(true);
+        $option->getOptions()->setHeight(500);
+        $option->getOptions()->setWidth(800);
+        $option->getOptions()->getTitleTextStyle()->setBold(true);
+        $option->getOptions()->getTitleTextStyle()->setColor('#009900');
+        $option->getOptions()->getTitleTextStyle()->setItalic(true);
+        $option->getOptions()->getTitleTextStyle()->setFontName('Arial');
+        $option->getOptions()->getTitleTextStyle()->setFontSize(20);
+
+        return $option;
     }
 
     public function menuAction($limit = 3)
@@ -150,4 +439,3 @@ class InscriptionController extends Controller{
     }
 
 }
-

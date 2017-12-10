@@ -1,11 +1,32 @@
+Admin:
+    path:     /platform/admin
+    defaults: { _controller: GEFORPlatformBundle:Inscription:admin }
+
+
 gefor_platform_homepage:
     path:     /
     defaults: { _controller: GEFORPlatformBundle:Default:index }
 
+
+
 Inscription:
     path:     /platform
-    defaults: { _controller: GEFORPlatformBundle:Inscription:home_view }
+    defaults: { _controller: GEFORPlatformBundle:Inscription:index }
 
-Admin:
-    path:     /platform/admin
-    defaults: { _controller: GEFORPlatformBundle:Inscription:admin }
+Inscription_new:
+    path:     /platform/{id}
+    defaults: { _controller: GEFORPlatformBundle:Inscription:new }
+
+Inscription_show:
+    path:     /platform/show/{id}
+    defaults: { _controller: GEFORPlatformBundle:Inscription:show }
+
+Inscription_delete:
+    path:     /platform/delete/{id}
+    defaults: { _controller: GEFORPlatformBundle:Inscription:delete }
+
+Inscription_edit:
+    path:     /platform/edit/{id}
+    defaults: { _controller: GEFORPlatformBundle:Inscription:edit }
+
+

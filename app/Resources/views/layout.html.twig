@@ -38,12 +38,12 @@
       <img src="http://www.gefor.com/wp-content/uploads/2015/11/gefor_logo_slogan.png" />
 
 
-      <h1>Ma plateforme d'annonces</h1>
+      <h1>Inscription en ligne</h1>
 
 
       <p>
 
-        Cette plateforme vous est porposé par GEFOR,<br />
+        Cette plateforme vous est proposée par GEFOR,<br />
         elle vous permet une inscription en ligne.
 
       </p>
@@ -55,18 +55,20 @@
 
       <div id="menu" class="col-md-3">
 
-        <h1>Les annonces</h1>
+        <h1>Navigation</h1>
 
         <ul class="nav nav-pills nav-stacked">
 
-          <li>{#<a href="{{ path('oc_platform_home') }}">lien de redirection 1 </a>#}lien de redirection 1</li>
+          <li><a href="{{ path('Inscription') }}">Retour à la platform</a></li>
 
-          <li>{#<a href="{{ path('oc_platform_add') }}">lien de redirection 2</a>#}lien de redirection 2</li>
+          <li><a href="{{ path('Admin') }}">Administration</a></li>
+
+          <li><a href="{{ path('formation_index') }}">Formation</a></li>
 
         </ul>
 
 
-        <h4>Dernières Inscritpion</h4>
+        <h4>Dernières Inscriptions</h4>
 
       {{ render(controller("GEFORPlatformBundle:Inscription:menu"))}}  
 
@@ -86,7 +88,7 @@
     <hr>
 
 
-    <footer>
+    <footer class="jumbotron ali">
 
       <p>The sky's the limit © {{ 'now'|date('Y') }} and beyond.</p>
 

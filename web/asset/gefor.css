@@ -1,19 +1,43 @@
 .ali {
 
 	color:navy;
+	background-image: url(http://www.u-b-h.com/wp-content/uploads/2017/02/240_F_100112686_PjNO0EKSL1dc0ipuvhW5GDONkQuUrwa6.jpg);
+	background-repeat:no-repeat;
+	background-position:100% 100%;
 
 }
 
-td{
-
-	width: 100px;
-	border: 2px solid black;
-}
-
-th{
-	width: 100px;
-	border: 2px solid black;
+table {
 	
-
+	border-collapse:collapse;
+	width:100%;
 }
+
+tr {
+		display:flex;
+		flex-direction:row;
+	}
+
+th, td {
+		width: 120px;
+		text-align:left;
+		border-right:0;
+		border-bottom:1px solid navy;
+		color: navy;
+}
+
+
+
+.conteneur{
+
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.ligne {
+
+	display: block;
+	background:#888;
+}
+
 

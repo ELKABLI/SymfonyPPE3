@@ -1,6 +1,6 @@
-{% extends 'base.html.twig' %}
+{% extends "GEFORPlatformBundle::layout.html.twig" %}
 
-{% block body %}
+{% block body %}    {{ parent() }}
     <h1>Formations list</h1>
 
     <table>
@@ -29,11 +29,11 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>
+    </table><br/>
 
-    <ul>
-        <li>
-            <a href="{{ path('formation_new') }}">Create a new formation</a>
-        </li>
-    </ul>
+    
+            <a href="{{ path('formation_new') }}" class="btn btn-default"><i class="glyphicon plyphicon-edit"></i>Creer une nouvelle formation
+            </a>
+        
+
 {% endblock %}
