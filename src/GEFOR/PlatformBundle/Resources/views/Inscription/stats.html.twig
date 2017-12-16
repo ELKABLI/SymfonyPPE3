@@ -1,0 +1,87 @@
+{% extends "GEFORPlatformBundle::layout.html.twig" %}
+
+{% block ocplatform_body %}
+
+	  {#
+	  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	  #}
+
+  <h2>Statistique sur les inscriptions</h2>
+            
+
+              <table>
+                <h4><div class="ligne">Formation demandée</div></h4>
+
+              <tr>
+                <th>{{ 'Formation' }}</th>
+                <th>{{ 'Nombre' }}</th>
+                <th>{{ 'Pourcentage' }}</th>
+              </tr>
+              <table>      
+         {% for key,value in nbcandidat %}  
+                <table>
+                    <tr>  
+                          <td>{{ key }}</td>
+                          <td>{{ value }}</td>
+                          <td>{{ ((value / nbcandidats) * 100)|round(0,'floor') }}</td>     
+                    </tr>
+              </table>
+            {% endfor %}
+
+             <div id="div_chart_stats2"  ></div>
+            <script type="text/javascript">
+            {{ gc_draw(pieChartstats2, 'div_chart_stats2')}}
+            </script><br><br>
+
+              <table>
+                <h4><div class="ligne"> Situation professionelle des candidats </div></h4>
+              <tr>
+                <th>{{ 'Situation' }}</th>
+                <th>{{ 'Nombre' }}</th>
+                <th>{{ 'Pourcentage' }}</th>
+              </tr>
+              <table>
+
+           
+         {% for key,value in nbsituation %}  
+                <table>
+                    <tr>  
+                          <td>{{ key }}</td>
+                          <td>{{ value }}</td>
+                          <td>{{ ((value / nbcandidats) * 100)|round(0,'floor') }}</td>
+                    </tr>
+              </table>
+            {% endfor %}
+
+            <div id="div_chart_stats1"  ></div>
+            <script type="text/javascript">
+            {{ gc_draw(pieChartstats1, 'div_chart_stats1')}}
+            </script>
+
+            <table>
+                <h4><div class="ligne"> Répartition des financements </div></h4>
+              <tr>
+                <th>{{ 'Situation' }}</th>
+                <th>{{ 'Nombre' }}</th>
+                <th>{{ 'Pourcentage' }}</th>
+              </tr>
+              <table>
+            {% for key,value in nbfinancement %}  
+                <table>
+                    <tr>  
+                          <td>{{ key }}</td>
+                          <td>{{ value }}</td>
+                          <td>{{ ((value / nbcandidats) * 100)|round(0,'floor') }}</td>
+                    </tr>
+              </table>
+            {% endfor %}
+
+            
+            <div id="div_chart_stats3"  ></div>
+            <script type="text/javascript">
+            {{ gc_draw(pieChartstats3, 'div_chart_stats3')}}
+            </script>
+
+          
+{% endblock %}
+

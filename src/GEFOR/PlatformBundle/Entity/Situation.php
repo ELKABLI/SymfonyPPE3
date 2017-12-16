@@ -3,6 +3,7 @@
 namespace GEFOR\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Situation
@@ -36,33 +37,7 @@ class Situation
      */
     private $type;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="finance", type="string", length=255)
-     */
-    private $finance;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="langue", type="string", length=255)
-     */
-    private $langue;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="informatique", type="string", length=255)
-     */
-    private $informatique;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="motivation", type="text")
-     */
-    private $motivation;
+   
 
 
     /**
@@ -97,102 +72,6 @@ class Situation
     public function getType()
     {
         return $this->type;
-    }
-
-    /**
-     * Set finance
-     *
-     * @param string $finance
-     *
-     * @return Situation
-     */
-    public function setFinance($finance)
-    {
-        $this->finance = $finance;
-
-        return $this;
-    }
-
-    /**
-     * Get finance
-     *
-     * @return string
-     */
-    public function getFinance()
-    {
-        return $this->finance;
-    }
-
-    /**
-     * Set langue
-     *
-     * @param string $langue
-     *
-     * @return Situation
-     */
-    public function setLangue($langue)
-    {
-        $this->langue = $langue;
-
-        return $this;
-    }
-
-    /**
-     * Get langue
-     *
-     * @return string
-     */
-    public function getLangue()
-    {
-        return $this->langue;
-    }
-
-    /**
-     * Set informatique
-     *
-     * @param string $informatique
-     *
-     * @return Situation
-     */
-    public function setInformatique($informatique)
-    {
-        $this->informatique = $informatique;
-
-        return $this;
-    }
-
-    /**
-     * Get informatique
-     *
-     * @return string
-     */
-    public function getInformatique()
-    {
-        return $this->informatique;
-    }
-
-    /**
-     * Set motivation
-     *
-     * @param string $motivation
-     *
-     * @return Situation
-     */
-    public function setMotivation($motivation)
-    {
-        $this->motivation = $motivation;
-
-        return $this;
-    }
-
-    /**
-     * Get motivation
-     *
-     * @return string
-     */
-    public function getMotivation()
-    {
-        return $this->motivation;
     }
 
     /**

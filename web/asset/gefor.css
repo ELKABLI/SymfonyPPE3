@@ -16,16 +16,27 @@ table {
 tr {
 		display:flex;
 		flex-direction:row;
+		border-bottom:1px solid navy;
 	}
 
 th, td {
 		width: 120px;
 		text-align:left;
 		border-right:0;
-		border-bottom:1px solid navy;
 		color: navy;
 }
 
+th.id, td.id{
+
+	width: 30px;
+
+
+}
+
+td.modifier, th.modifier{
+
+	width : 80px;
+}
 
 
 .conteneur{
@@ -35,9 +46,12 @@ th, td {
 }
 
 .ligne {
-
+	text-align:center;
 	display: block;
-	background:#888;
+	border-bottom:3px solid navy;
+	border-top:3px solid navy;
+	color: navy;
+	background: #eee;
 }
 
 

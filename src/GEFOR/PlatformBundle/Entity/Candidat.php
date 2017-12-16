@@ -2,23 +2,28 @@
 
 namespace GEFOR\PlatformBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Misd\PhoneNumberBundle\MisdPhoneNumberBundle;
+use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumber;
+
 
 /**
  * Candidat
  *
  * @ORM\Table(name="candidat")
  * @ORM\Entity(repositoryClass="GEFOR\PlatformBundle\Repository\CandidatRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Candidat
 {
     /**
-     * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Agenda", inversedBy="candidats", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Financement", inversedBy="candidats", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * 
      */
-    private $agenda;
-
+    private $financement;
 
     /**
      * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Formation", inversedBy="candidats", cascade={"persist"})
@@ -30,6 +35,7 @@ class Candidat
     /**
      * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Situation", inversedBy="candidats", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
      */
     private $situation;
 
@@ -96,27 +102,38 @@ class Candidat
      * @var int
      *
      * @ORM\Column(name="cp", type="integer")
+     * @Assert\Range(
+     *      min = 01000,
+     *      max = 99999,
+     *      minMessage = "Le code postale doit être supérieur à {{ limit }}",
+     *      maxMessage = "Le code postale doit être inferieur à {{ limit }}")
+     *
+     *
      */
     private $cp;
 
     /**
-     * @var string
-     *
+     * 
      * @ORM\Column(name="ville", type="string", length=255)
+     * @Assert\Length(min=1, minMessage="xxxxx")
      */
     private $ville;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="tel", type="integer")
+     * @ORM\Column(name="tel", type="string", nullable = true)
+     * @Assert\Regex(pattern="/^0[1-59]([ .-]?[0-9][0-9]){4}$/", message="Veuillez saisir un numéro de téléphone fixe valide")
+     * 
      */
     private $tel;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="portable", type="integer")
+     * @ORM\Column(name="portable", type="integer", nullable = true)
+     * @Assert\Regex(pattern="/^0[6-7]([ .-]?[0-9][0-9]){4}$/", message="Veuillez saisir un numéro de téléphone portable valide")
+     * 
      */
     private $portable;
 
@@ -130,9 +147,23 @@ class Candidat
     /**
      * @var string
      *
-     * @ORM\Column(name="famille", type="string", length=255)
+     * @ORM\Column(name="famille", type="string", length=255, nullable = true)
      */
     private $famille;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="motivation", type="string", length=255)
+     */
+    private $motivation;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contact", type="string", length=255)
+     */
+    private $contact;
 
     /**
      * Get id
@@ -506,27 +537,77 @@ class Candidat
         return $this->situation;
     }
 
+   
+
     /**
-     * Set agenda
+     * Set financement
      *
-     * @param \GEFOR\PlatformBundle\Entity\Agenda $agenda
+     * @param \GEFOR\PlatformBundle\Entity\Financement $financement
      *
      * @return Candidat
      */
-    public function setAgenda(\GEFOR\PlatformBundle\Entity\Agenda $agenda)
+    public function setFinancement(\GEFOR\PlatformBundle\Entity\Financement $financement)
     {
-        $this->agenda = $agenda;
+        $this->financement = $financement;
 
         return $this;
     }
 
     /**
-     * Get agenda
+     * Get financement
      *
-     * @return \GEFOR\PlatformBundle\Entity\Agenda
+     * @return \GEFOR\PlatformBundle\Entity\Financement
      */
-    public function getAgenda()
+    public function getFinancement()
     {
-        return $this->agenda;
+        return $this->financement;
+    }
+
+    /**
+     * Set motivation
+     *
+     * @param string $motivation
+     *
+     * @return Candidat
+     */
+    public function setMotivation($motivation)
+    {
+        $this->motivation = $motivation;
+
+        return $this;
+    }
+
+    /**
+     * Get motivation
+     *
+     * @return string
+     */
+    public function getMotivation()
+    {
+        return $this->motivation;
+    }
+
+    /**
+     * Set contact
+     *
+     * @param string $contact
+     *
+     * @return Candidat
+     */
+    public function setContact($contact)
+    {
+        $this->contact = $contact;
+
+        return $this;
+    }
+
+    /**
+     * Get contact
+     *
+     * @return string
+     */
+    public function getContact()
+    {
+        return $this->contact;
     }
 }

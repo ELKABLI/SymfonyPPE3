@@ -1,7 +1,3 @@
-gefor_platform_agenda:
-    resource: "@GEFORPlatformBundle/Controller/AgendaController.php"
-    type:     annotation
-
 gefor_platform_formation:
     resource: "@GEFORPlatformBundle/Controller/FormationController.php"
     type:     annotation

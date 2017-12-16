@@ -3,6 +3,7 @@
 namespace GEFOR\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Situation
@@ -14,7 +15,7 @@ class Situation
 {   
 
     /**
-     * @ORM\OneToMany(targetEntity="GEFOR\PlatformBundle\Entity\Candidat", mappedBy="situation")
+     * @ORM\OneToMany(targetEntity="GEFOR\PlatformBundle\Entity\Candidat", mappedBy="situation", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $candidats;
@@ -40,6 +41,7 @@ class Situation
      * @var string
      *
      * @ORM\Column(name="finance", type="string", length=255)
+     * @Assert\Length(min=1, minMessage="xxxxx")
      */
     private $finance;
 

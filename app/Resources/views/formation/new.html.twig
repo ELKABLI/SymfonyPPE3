@@ -1,16 +1,14 @@
 {% extends "GEFORPlatformBundle::layout.html.twig" %}
 
 {% block body %}{{ parent() }}
-    <h1>Formation creation</h1>
+    <h1>Formation création</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+        <input class="btn btn-default" type="submit" value="Créer" /> 
+    {{ form_end(form) }}<br/>
 
-    <ul>
-        <li>
-            <a href="{{ path('formation_index') }}">Back to the list</a>
-        </li>
-    </ul>
+    
+            <a class="btn btn-default" href="{{ path('formation_index') }}">Retour à la liste</a>
+
 {% endblock %}

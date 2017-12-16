@@ -2,6 +2,7 @@
 
 {% block ocplatform_body %}
 
+	{{ listErrors }}
 
 
 	 {% for message in app.session.flashbag.get('notice') %}
@@ -17,8 +18,7 @@
 
 
       {{ form(form) }}
-      calendrier
-  
+    
       
 
 

@@ -2,18 +2,20 @@
 
 {% block ocplatform_body %}
 
-  <h2>Tableau administrateur des inscriptions</h2>
+   <script type="text/javascript" src="{{ asset('loader.js') }}"></script>
+
+  <h2>Demande d' Inscritpion</h2>
               <table>
               <tr>
-                <th>Id</th>
+                <th class="id">Id</th>
                 <th>{{ 'Date' }}</th>
                 <th>{{ 'Projet' }}</th>
                 <th>{{ 'nom' }}</th>
                 <th>{{ 'prénom' }}</th>
-                <th>{{ 'Adresse' }}</th>
+                {#<th>{{ 'Adresse' }}</th>#}
                 <th>{{ 'Cp' }}</th>   
                 <th>{{ 'Situation' }}</th>
-                <th>{{ 'Action' }}</th>
+                <th class="modifier">{{ 'Action' }}</th>
                 
               </tr>
               <table>
@@ -22,23 +24,21 @@
             <table>
                         
               <tr> 
-                <td><a href="{{ path('Inscription_show', { 'id': a.id }) }}">{{ a.id }}</a></td>      
+                <td class="id"><a href="{{ path('Inscription_show', { 'id': a.id }) }}">{{ a.id }}</a></td>      
                 <td>{{ a.date|date('d-m-Y') }}</td>
                 <td>{{ a.Formation.type }}</td>
                 <td>{{ a.nom }}</td>
                 <td>{{ a.prenom }}</td>
                 {#<td>{{ a.neele|date('Y') }}</td>#}  
                 {#<td>{{ a.numerosecu }}</td>#}
-                <td>{{ a.adresse }}</td>
+                {#<td>{{ a.adresse }}</td>#}
                 <td>{{ a.cp }}</td>  
                 <td>{{ a.Situation.type }}</td>
-                <td>
+                <td class="modifier" >
                   <li>
-                  <a href="{{ path('Inscription_show', { 'id': a.id }) }}">{{ 'edit' }}</a>
+                  <a href="{{ path('Inscription_show', { 'id': a.id }) }}">{{ 'Modifier' }}</a>
                   </li>
-                  <li>
-                  <a href="{{ path('Inscription_show', { 'id': a.id }) }}">{{ 'delete' }}</a>
-                  </li>
+                  
                 </td> 
               </tr>
             </table>
@@ -50,7 +50,7 @@
     <div id="div_chartg2"></div>
     </div>
     
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   
     
     <script type="text/javascript">
         {{ gc_draw(piechartg1, 'div_chartg1') }}
@@ -118,45 +118,71 @@
              
         
               <table>
-                <div class="ligne"> {{ loop.index~"  "~a.type }} </div>
+                <h3><div class="ligne"> {{ loop.index~"  "~a.type }} </div></h3>
               <table>
               <tr>
+                <th class="id">Id</th>
                 <th>{{ 'Date' }}</th>
                 <th>{{ 'Projet' }}</th>
                 <th>{{ 'Nom' }}</th>
                 <th>{{ 'Prénom' }}</th>
-                <th>{{ 'Adresse' }}</th>
                 <th>{{ 'Cp' }}</th>
                 <th>{{ 'Situation' }}</th>
+                <th class="modifier">{{ 'Action' }}</th>
               </tr>
               <table>
                 {% for b in a.candidats %}
-
-                  
                 <table>
                     <tr>
+                          <td class="id"><a href="{{ path('Inscription_show', { 'id': b.id }) }}">{{ b.id }}</a></td>      
                           <td>{{ b.date|date('d-m-Y') }}</td>
                           <td>{{ a.type }}</td>
                           <td>{{ b.nom }}</td>
                           <td>{{ b.prenom }}</td>
-                          <td>{{ b.adresse }}</td>
                           <td>{{ b.cp }}</td>
                           <td>{{ b.situation.type }}</td>
-                            
+                          <td class="modifier">
+                  <li>
+                  <a href="{{ path('Inscription_show', { 'id': b.id }) }}">{{ 'Modifier' }}</a>
+                  </li>
+                  
+                </td>       
                     </tr>
               </table>
 
 
             {% endfor %}
 
-              {% if loop.index <4 %}
+             {% if loop.index < 4 %}
               <div id="div_chart_loop{{loop.index}}"  ></div>
 
               <script type="text/javascript">
                         {{ gc_draw(piechart[loop.index], 'div_chart_loop' ~ loop.index) }}
               </script> 
-              {% endif %}  
-              
+              {% endif %}
         {% endfor %}
+
+
+<h3>Prise de contact</h3>
+
+ <h3><div class="ligne"> Demande de Rendez - Vous </div></h3>
+
+  <table>
+              <tr>
+                <th>Id</th>
+                <th>{{ 'Nom' }}</th>
+                <th>{{ 'prénom' }}</th>
+                <th>{{ 'Date demande' }}</th>
+              </tr>
+              <table>
+          {% for a in contactarray %} 
+           
+              <table><tr> 
+              {% for key,value  in a %} 
+              <td>{{ value }}</td>
+              {% endfor %}
+            </tr></table>
+            {% endfor %}
+         
 {% endblock %}
 

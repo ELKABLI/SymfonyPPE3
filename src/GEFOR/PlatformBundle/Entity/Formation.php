@@ -3,6 +3,9 @@
 namespace GEFOR\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 /**
  * Formation
@@ -33,6 +36,7 @@ class Formation
      * @var string
      *
      * @ORM\Column(name="Type", type="string", length=255)
+     * 
      */
     private $type;
 

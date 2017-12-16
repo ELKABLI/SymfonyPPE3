@@ -1,11 +1,20 @@
+Inscription_show:
+    path:     /platform/show/{id}
+    defaults: { _controller: GEFORPlatformBundle:Inscription:show }
+
 Admin:
     path:     /platform/admin
     defaults: { _controller: GEFORPlatformBundle:Inscription:admin }
+
+Admin_stats:
+    path:     /platform/admin/stats
+    defaults: { _controller: GEFORPlatformBundle:Inscription:stats }
 
 
 gefor_platform_homepage:
     path:     /
     defaults: { _controller: GEFORPlatformBundle:Default:index }
+
 
 
 
@@ -17,9 +26,6 @@ Inscription_new:
     path:     /platform/{id}
     defaults: { _controller: GEFORPlatformBundle:Inscription:new }
 
-Inscription_show:
-    path:     /platform/show/{id}
-    defaults: { _controller: GEFORPlatformBundle:Inscription:show }
 
 Inscription_delete:
     path:     /platform/delete/{id}

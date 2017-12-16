@@ -18,10 +18,19 @@
 
   {% block stylesheets %}
 
-    {# On charge le CSS de bootstrap depuis le site directement #}
+    {# On charge le CSS de bootstrap depuis le site directement 
 
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">#}
+    
+    <link rel="stylesheet" href="{{ asset('asset/bootstrap.min.css') }}">
+
     <link rel="stylesheet" href="{{ asset('asset/gefor.css') }}" type="text/css" media="all">
+
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+    <link rel="stylesheet" href="{{ asset('asset/loader.js') }}">
+
     {#voir avec ciro pour mettre 'ali css en bleu#}
 
   {% endblock %}
@@ -59,18 +68,20 @@
 
         <ul class="nav nav-pills nav-stacked">
 
-          <li><a href="{{ path('Inscription') }}">Retour à la platform</a></li>
+          <li><a href="{{ path('Inscription') }}">S'inscrire en ligne</a></li>
+          
+          <li><a href="{{ path('formation_index') }}">Formation</a></li>
 
           <li><a href="{{ path('Admin') }}">Administration</a></li>
 
-          <li><a href="{{ path('formation_index') }}">Formation</a></li>
+          <li><a href="{{ path('Admin_stats') }}">Statistique</a></li>
 
         </ul>
 
 
         <h4>Dernières Inscriptions</h4>
 
-      {{ render(controller("GEFORPlatformBundle:Inscription:menu"))}}  
+      {{ render(controller("GEFORPlatformBundle:Inscription:menu"))}}
 
       </div>
 

@@ -5,19 +5,19 @@ namespace GEFOR\PlatformBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Agenda
+ * Financement
  *
- * @ORM\Table(name="agenda")
- * @ORM\Entity(repositoryClass="GEFOR\PlatformBundle\Repository\AgendaRepository")
+ * @ORM\Table(name="financement")
+ * @ORM\Entity(repositoryClass="GEFOR\PlatformBundle\Repository\FinancementRepository")
  */
-class Agenda
+class Financement
 {   
+
     /**
-     * @ORM\OneToMany(targetEntity="GEFOR\PlatformBundle\Entity\Candidat", mappedBy="agenda", cascade={"persist","remove"})
+     * @ORM\OneToMany(targetEntity="GEFOR\PlatformBundle\Entity\Candidat", mappedBy="financement", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $candidats;
-
 
     /**
      * @var int
@@ -29,11 +29,11 @@ class Agenda
     private $id;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="date", type="datetime", unique=true)
+     * @ORM\Column(name="type", type="string", length=255)
      */
-    private $date;
+    private $type;
 
 
     /**
@@ -47,27 +47,27 @@ class Agenda
     }
 
     /**
-     * Set date
+     * Set type
      *
-     * @param \DateTime $date
+     * @param string $type
      *
-     * @return Agenda
+     * @return Financement
      */
-    public function setDate($date)
+    public function setType($type)
     {
-        $this->date = $date;
+        $this->type = $type;
 
         return $this;
     }
 
     /**
-     * Get date
+     * Get type
      *
-     * @return \DateTime
+     * @return string
      */
-    public function getDate()
+    public function getType()
     {
-        return $this->date;
+        return $this->type;
     }
     /**
      * Constructor
@@ -82,7 +82,7 @@ class Agenda
      *
      * @param \GEFOR\PlatformBundle\Entity\Candidat $candidat
      *
-     * @return Agenda
+     * @return Financement
      */
     public function addCandidat(\GEFOR\PlatformBundle\Entity\Candidat $candidat)
     {

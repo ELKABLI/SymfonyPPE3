@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new GEFOR\PlatformBundle\GEFORPlatformBundle(),
             new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
+            new Misd\PhoneNumberBundle\MisdPhoneNumberBundle(),
            
            
         );

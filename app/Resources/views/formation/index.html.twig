@@ -1,7 +1,7 @@
 {% extends "GEFORPlatformBundle::layout.html.twig" %}
 
 {% block body %}    {{ parent() }}
-    <h1>Formations list</h1>
+    <h1>Formations disponibles</h1>
 
     <table>
         <thead>
@@ -19,10 +19,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('formation_show', { 'id': formation.id }) }}">show</a>
+                            <a href="{{ path('formation_show', { 'id': formation.id }) }}">Voir</a>
                         </li>
                         <li>
-                            <a href="{{ path('formation_edit', { 'id': formation.id }) }}">edit</a>
+                            <a href="{{ path('formation_edit', { 'id': formation.id }) }}">Modifier</a>
                         </li>
                     </ul>
                 </td>
