@@ -1,14 +1,16 @@
 {% extends "GEFORPlatformBundle::layout.html.twig" %}
 
 {% block body %}    {{ parent() }}
-    <h1>Formations disponibles</h1>
+    <h3>Formations disponibles</h3>
 
     <table>
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Type</th>
+                {% if is_granted('ROLE_ADMIN') %}
                 <th>Actions</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -16,6 +18,7 @@
             <tr>
                 <td><a href="{{ path('formation_show', { 'id': formation.id }) }}">{{ formation.id }}</a></td>
                 <td>{{ formation.type }}</td>
+                {% if is_granted('ROLE_ADMIN') %}
                 <td>
                     <ul>
                         <li>
@@ -26,14 +29,16 @@
                         </li>
                     </ul>
                 </td>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>
     </table><br/>
 
-    
+            {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ path('formation_new') }}" class="btn btn-default"><i class="glyphicon plyphicon-edit"></i>Creer une nouvelle formation
             </a>
-        
+            {% endif %}
+
 
 {% endblock %}

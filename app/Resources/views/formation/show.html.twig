@@ -19,11 +19,14 @@
 
     
             <a href="{{ path('formation_index') }}" class="btn btn-default" >Retour à la liste<i class="glyphicon plyphicon-edit"></i></a>
-       
+            
+            {% if is_granted('ROLE_ADMIN') %}
             <a class="btn btn-default" href="{{ path('formation_edit', { 'id': formation.id }) }}">Modifier</a><br/><br/>
+
        
             {{ form_start(delete_form) }}
                 <input class="btn btn-delete" type="submit" value="Supprimer">
             {{ form_end(delete_form) }}
+            {% endif %}
    
 {% endblock %}

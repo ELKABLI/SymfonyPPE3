@@ -5,7 +5,14 @@ namespace GEFOR\PlatformBundle\Controller;
 use GEFOR\PlatformBundle\Entity\Formation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
+
+
+
 
 /**
  * Formation controller.
@@ -36,9 +43,27 @@ class FormationController extends Controller
      *
      * @Route("/new", name="formation_new")
      * @Method({"GET", "POST"})
+     * 
      */
     public function newAction(Request $request)
     {
+        /* {
+    // On vérifie que l'utilisateur dispose bien du rôle ROLE_
+    if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+
+      // Sinon on déclenche une exception « Accès interdit »
+
+      throw new AccessDeniedException('Accès limité aux ROLE_USER.');
+
+    }
+
+
+    // Ici l'utilisateur a les droits suffisant,
+
+    // on peut ajouter une annonce
+
+  }*/
+
         $formation = new Formation();
         $form = $this->createForm('GEFOR\PlatformBundle\Form\FormationType', $formation);
         $form->handleRequest($request);

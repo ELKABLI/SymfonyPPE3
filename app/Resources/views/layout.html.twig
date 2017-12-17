@@ -31,7 +31,6 @@
 
     <link rel="stylesheet" href="{{ asset('asset/loader.js') }}">
 
-    {#voir avec ciro pour mettre 'ali css en bleu#}
 
   {% endblock %}
 
@@ -64,22 +63,32 @@
 
       <div id="menu" class="col-md-3">
 
-        <h1>Navigation</h1>
+        <h3>Navigation</h3>
 
         <ul class="nav nav-pills nav-stacked">
 
           <li><a href="{{ path('Inscription') }}">S'inscrire en ligne</a></li>
           
-          <li><a href="{{ path('formation_index') }}">Formation</a></li>
+          <li><a href="{{ path('formation_index') }}">Formations</a></li>
 
+        {% if is_granted('ROLE_ADMIN') %}
           <li><a href="{{ path('Admin') }}">Administration</a></li>
+        {% endif %}
 
-          <li><a href="{{ path('Admin_stats') }}">Statistique</a></li>
+          <li><a href="{{ path('Admin_stats') }}">Statistiques</a></li>
 
         </ul>
 
+        <h3>S' identifier</h3>
 
-        <h4>Dernières Inscriptions</h4>
+        <ul class="nav nav-pills nav-stacked">
+          <li><a href="{{ path('login') }}">Se connecter</a></li>  
+          <li><a href="{{ path('logout') }}">Déconnexion</a></li>
+        </ul>
+
+
+
+        <h3>Dernières Inscriptions</h3>
 
       {{ render(controller("GEFORPlatformBundle:Inscription:menu"))}}
 

@@ -19,8 +19,9 @@ class AppKernel extends Kernel
             new GEFOR\PlatformBundle\GEFORPlatformBundle(),
             new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
             new Misd\PhoneNumberBundle\MisdPhoneNumberBundle(),
-           
-           
+            new GEFOR\UserBundle\GEFORUserBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
@@ -28,6 +29,7 @@ class AppKernel extends Kernel
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
+            
         }
 
         return $bundles;
