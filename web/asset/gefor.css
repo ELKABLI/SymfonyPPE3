@@ -26,6 +26,11 @@ th, td {
 		color: navy;
 }
 
+th.droit, td.droit{
+
+	width: 170px;
+}
+
 th.id, td.id{
 
 	width: 30px;

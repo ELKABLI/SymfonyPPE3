@@ -1,3 +1,7 @@
+gefor_user_user:
+    resource: "@GEFORUserBundle/Controller/UserController.php"
+    type:     annotation
+
 gefor_platform_formation:
     resource: "@GEFORPlatformBundle/Controller/FormationController.php"
     type:     annotation

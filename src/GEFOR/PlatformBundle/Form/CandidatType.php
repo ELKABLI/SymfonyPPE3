@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -34,7 +35,11 @@ class CandidatType extends AbstractType
             //->add('date', DateTimeType::class)
             ->add('prenom', TextType::class)
             ->add('nom', TextType::class)
-            ->add('neele', DateType::class, array('label'=>'Date de naissance'))
+            //->add('neele', DateType::class, array('label'=>'Date de naissance'))
+            ->add('neele', BirthdayType::class, array( 'format' => 'dd-MM-yyyy','placeholder' => array(
+        'day' => 'Jour', 'month' => 'Mois', 'year' => 'Année' 
+    ), 'label' => 'Date de naissance'
+))
             ->add('nationalite', CountryType::class)
             //->add('numerosecu', IntegerType::class)
             ->add('adresse', TextType::class)
@@ -70,7 +75,7 @@ class CandidatType extends AbstractType
             /*->add('formations', CollectionType::class,
                 array('entry_type' => FormationType::class)
             ) */
-            ->add('save', SubmitType::class)
+            ->add('save', SubmitType::class, array('label' => 'Enregistrer'))
         ;
     }
     

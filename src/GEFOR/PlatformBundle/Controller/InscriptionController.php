@@ -41,7 +41,7 @@ class InscriptionController extends Controller
             return $this->redirectToRoute('Inscription_new', array('id' => $candidat->getId(), 'sms' => $request)); // on transmet au controlleur newAction l'annonce unique caractérisé par son id du new candidat, new action récuper cette objet et le transmet a sa vu.
         }
 
-        dump(count($listErrors));
+       
 
         return $this->render('GEFORPlatformBundle:Inscription:index.html.twig', array('form' => $form->createView(), 'listErrors' => $listErrors));
 
@@ -94,6 +94,7 @@ class InscriptionController extends Controller
         $nbcandidats = count($candidat);
 
         $contact = $em->getRepository('GEFORPlatformBundle:Candidat')->findBycontact('Oui');
+
 
         $contactarray = array();
         foreach ($contact as $value) {

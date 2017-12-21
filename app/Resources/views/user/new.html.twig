@@ -1,0 +1,18 @@
+{% extends "GEFORPlatformBundle::layout.html.twig" %}
+
+{% block body %}
+    <h1>Création de compte</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-default" type="submit"/><span class="glyphicon glyphicon-share"></span> Créer</button>
+
+
+    {{ form_end(form) }}<br/>
+
+ 		{% if is_granted('ROLE_DEVELOPPEUR') %}
+            <a class="btn btn-default" href="{{ path('user_index') }}"><span class="glyphicon glyphicon-chevron-left"></span> Retour à la liste</a>
+
+        {% endif %}
+   
+{% endblock %}

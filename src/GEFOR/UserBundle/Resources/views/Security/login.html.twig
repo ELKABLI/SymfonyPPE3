@@ -1,7 +1,7 @@
 {# src/OC/UserBundle/Resources/views/Security/login.html.twig #}
 
 
-{% extends "GEFORPlatformBundle::layout.html.twig" %}
+{% extends "GEFORPlatformBundle::layout.html.twig" %} 
 
 
 {% block body %}
@@ -15,25 +15,31 @@
 
   {% endif %}
 
-
   {# Le formulaire, avec URL de soumission vers la route « login_check » comme on l'a vu #}
 
   <form action="{{ path('login_check') }}" method="post">
 
-    <label for="username">Login :</label>
+    <legend>Se connecter</legend>
 
-    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+    <label for="username">Identifiant :</label>
+
+    <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" />
+
+    
 
 
     <label for="password">Mot de passe :</label>
 
-    <input type="password" id="password" name="_password" />
+    <input type="password" id="password" name="_password" class="form-control"/>
 
     <br />
 
-    <input type="submit" value="Connexion" />
+    <button class="btn btn-default" type="submit"/><span class="glyphicon glyphicon-ok"></span> Connexion </button>
+
+
 
   </form>
+  
 
 
 {% endblock %}

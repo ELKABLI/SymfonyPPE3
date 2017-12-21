@@ -33,7 +33,7 @@ class Candidat
     private $formation;
 
     /**
-     * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Situation", inversedBy="candidats", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="GEFOR\PlatformBundle\Entity\Situation", inversedBy="candidats", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * @Assert\Valid()
      */

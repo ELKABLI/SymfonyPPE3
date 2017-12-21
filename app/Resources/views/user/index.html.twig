@@ -1,0 +1,48 @@
+{% extends "GEFORPlatformBundle::layout.html.twig" %}
+
+{% block body %}
+    <h1>Liste des utilisateurs</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Identifiant</th>
+                <th>Mot de passe</th>
+                {#<th>Salt</th>#}
+                <th class="droit">Droit</th>
+                {% if is_granted('ROLE_DEVELOPPEUR') %}
+                <th>Actions</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.password }}</td>
+                {#<td>{{ user.salt }}</td>#}
+                <td class="droit">{% if user.roles %}{{ user.roles|join(', ') }}{% endif %}</td>
+                {% if is_granted('ROLE_DEVELOPPEUR') %}
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('user_show', { 'id': user.id }) }}">Voir</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('user_edit', { 'id': user.id }) }}">Modifier</a>
+                        </li>
+                    </ul>
+                </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table><br/>
+
+        {% if is_granted('ROLE_DEVELOPPEUR') %}
+            <a href="{{ path('user_new') }}" class="btn btn-default">
+                <i class="glyphicon glyphicon-edit"></i>&nbsp Creer un nouvelle utilisateur</a>
+        {% endif %}        
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "GEFORPlatformBundle::layout.html.twig" %}
+
+{% block body %}
+    <h1>Utilisateur</h1>
+
+    {% for message in app.session.flashbag.get('notice') %}
+
+        <h3>Bonjour {{ user.username }} : {{ message }}</h3>
+
+  {% endfor %}
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <th>Mot de passe</th>
+                <td>{{ user.password }}</td>
+            </tr>
+            {#
+            <tr>
+                <th>Roles</th>
+                <td>{% if user.roles %}{{ user.roles|join(', ') }}{% endif %}</td>
+            </tr>
+            #}
+        </tbody>
+    </table><br/><br/>
+
+            {% if is_granted('ROLE_DEVELOPPEUR') %}
+            <a href="{{ path('user_index') }}" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span>Retour à la liste</a>
+            {% endif %}
+
+            {% if is_granted('ROLE_DEVELOPPEUR') %}
+            <a class="btn btn-default" href="{{ path('user_edit', { 'id': user.id }) }}"><span class="glyphicon glyphicon-edit"> Modifier</span></a><br/><br/>
+            {% endif %}
+
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+            {{ form_start(delete_form) }}
+
+                <button class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-trash ">Supprimer</span></button>
+            {{ form_end(delete_form) }}
+            {% endif %}
+
+{% endblock %}

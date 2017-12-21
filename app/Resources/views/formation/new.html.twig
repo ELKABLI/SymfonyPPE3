@@ -5,10 +5,10 @@
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input class="btn btn-default" type="submit" value="Créer" /> 
+        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-share"></span> Créer</button>
     {{ form_end(form) }}<br/>
 
     
-            <a class="btn btn-default" href="{{ path('formation_index') }}">Retour à la liste</a>
+            <a class="btn btn-default" href="{{ path('formation_index') }}"><span class="glyphicon glyphicon-chevron-left"></span> Retour à la liste</button></a>
 
 {% endblock %}

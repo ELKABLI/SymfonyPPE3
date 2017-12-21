@@ -6,8 +6,9 @@ security:
 
 
     role_hierarchy:
-        ROLE_ADMIN:       [ROLE_VISITEUR]
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_USER:        [ROLE_VISITEUR] #a le droit de consulter les tables
+        ROLE_ADMIN:       [ROLE_VISITEUR, ROLE_DEVELOPPEUR] #a le droit de consulter, modifier et creer des tables
+        ROLE_SUPER_ADMIN: [ROLE_VISITEUR,ROLE_DEVELOPPEUR, ROLE_ADMINISTRATEUR] #a le droit de consulter, supprimer et creer des tables
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:

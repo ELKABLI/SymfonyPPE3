@@ -4,8 +4,11 @@
 
    <script type="text/javascript" src="{{ asset('loader.js') }}"></script>
 
-  <h2>Demande d' Inscritpion</h2>
-              <table>
+  
+  <a href="#item" data-toggle="collapse"><h2>Demande d' Inscritpion</h2></a> 
+
+<div id="item" class="collapse">
+       <table>
               <tr>
                 <th class="id">Id</th>
                 <th>{{ 'Date' }}</th>
@@ -45,6 +48,10 @@
 
             {% endfor %}
 
+          </div>
+
+
+{#
     <div class="conteneur">
     <div id="div_chartg1"></div>
     <div id="div_chartg2"></div>
@@ -56,9 +63,12 @@
         {{ gc_draw(piechartg1, 'div_chartg1') }}
         {{ gc_draw(piechartg2, 'div_chartg2') }}
     </script>
+#}
     
+ <a href="#item2" data-toggle="collapse"><h3>Affichage par projet souhaité</h3></a> 
 
-<h3>Affichage par projet souhaité</h3>
+<div id="item2" class="collapse">
+
 {#
 
 {% for a in filtre %}
@@ -152,18 +162,24 @@
 
 
             {% endfor %}
-
+            {#
              {% if loop.index < 4 %}
               <div id="div_chart_loop{{loop.index}}"  ></div>
 
               <script type="text/javascript">
                         {{ gc_draw(piechart[loop.index], 'div_chart_loop' ~ loop.index) }}
               </script> 
-              {% endif %}
+              {% endif %}#}
         {% endfor %}
 
+    </div>
 
-<h3>Prise de contact</h3>
+<a href="#item3" data-toggle="collapse"><h3>Prise de contact</h3></a> 
+
+<div id="item3" class="collapse">
+
+
+
 
  <h3><div class="ligne"> Demande de Rendez - Vous </div></h3>
 
@@ -175,14 +191,27 @@
                 <th>{{ 'Date demande' }}</th>
               </tr>
               <table>
-          {% for a in contactarray %} 
+
+          {% for a in contactarray %}
+
+
            
               <table><tr> 
               {% for key,value  in a %} 
-              <td>{{ value }}</td>
+              {# <td class="id"><a href="{{ path('Inscription_show', { 'id': b.id }) }}">{{ b.id }}</a></td> #}
+              <td>
+                {% if key == 0  %}
+                <a href="{{ path('Inscription_show', { 'id': value }) }}">{{ value }}</a>
+                {% else %}
+
+                  {{ value }}
+
+               {% endif %}
+              </td>  
               {% endfor %}
             </tr></table>
             {% endfor %}
+          </div>
          
 {% endblock %}
 

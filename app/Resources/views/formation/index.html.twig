@@ -8,7 +8,7 @@
             <tr>
                 <th>Id</th>
                 <th>Type</th>
-                {% if is_granted('ROLE_ADMIN') %}
+                {% if is_granted('ROLE_DEVELOPPEUR') %}
                 <th>Actions</th>
                 {% endif %}
             </tr>
@@ -18,14 +18,16 @@
             <tr>
                 <td><a href="{{ path('formation_show', { 'id': formation.id }) }}">{{ formation.id }}</a></td>
                 <td>{{ formation.type }}</td>
-                {% if is_granted('ROLE_ADMIN') %}
+                {% if is_granted('ROLE_DEVELOPPEUR') %}
                 <td>
                     <ul>
                         <li>
                             <a href="{{ path('formation_show', { 'id': formation.id }) }}">Voir</a>
                         </li>
                         <li>
-                            <a href="{{ path('formation_edit', { 'id': formation.id }) }}">Modifier</a>
+                            <a href="{{ path('formation_edit', { 'id': formation.id }) }}">
+                            <i class="glyphicon glyphicon-edit"></i>
+                            Modifier</a>
                         </li>
                     </ul>
                 </td>
@@ -35,8 +37,9 @@
         </tbody>
     </table><br/>
 
-            {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('formation_new') }}" class="btn btn-default"><i class="glyphicon plyphicon-edit"></i>Creer une nouvelle formation
+            {% if is_granted('ROLE_DEVELOPPEUR') %}
+            <a href="{{ path('formation_new') }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-edit"></i>&nbsp Creer une nouvelle formation
             </a>
             {% endif %}
 

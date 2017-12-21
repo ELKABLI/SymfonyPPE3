@@ -1,0 +1,23 @@
+{% extends "GEFORPlatformBundle::layout.html.twig" %}
+
+{% block body %}
+    <h1>Modification des utilisateurs</h1>
+
+<table>
+    <tr>
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> Modifier</button>
+    {{ form_end(edit_form) }}
+
+            <a href="{{ path('user_index') }}" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span>Retour à la liste</a>
+
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+            {{ form_start(delete_form) }}
+                <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash">Supprimer</span></button> 
+
+            {{ form_end(delete_form) }}
+            {% endif %}
+    </tr>
+ </table>
+{% endblock %}

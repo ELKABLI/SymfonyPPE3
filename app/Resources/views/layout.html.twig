@@ -22,7 +22,8 @@
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">#}
     
-    <link rel="stylesheet" href="{{ asset('asset/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('asset/bootstrap-3.2.0/dist/css/bootstrap.min.css') }}">
+    
 
     <link rel="stylesheet" href="{{ asset('asset/gefor.css') }}" type="text/css" media="all">
 
@@ -71,7 +72,7 @@
           
           <li><a href="{{ path('formation_index') }}">Formations</a></li>
 
-        {% if is_granted('ROLE_ADMIN') %}
+        {% if is_granted('ROLE_DEVELOPPEUR') %}
           <li><a href="{{ path('Admin') }}">Administration</a></li>
         {% endif %}
 
@@ -79,7 +80,27 @@
 
         </ul>
 
-        <h3>S' identifier</h3>
+        
+      {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
+
+        <h3>Créer un compte</h3>
+         <ul class="nav nav-pills nav-stacked">
+          <li><a href="{{ path('user_new') }}">Je créer mon compte</a></li>   
+        </ul>
+      {% else %}
+        {% if is_granted('ROLE_DEVELOPPEUR') %}
+
+        <h3>Créer un compte</h3>
+         <ul class="nav nav-pills nav-stacked">
+          <li><a href="{{ path('user_new') }}">Je créer mon compte</a></li>
+          <li><a href="{{ path('user_index') }}">Liste des utilisateurs</a></li>   
+        </ul>
+
+      {% endif %}
+      {% endif %}
+
+
+        <h3>Identifiez vous</h3>
 
         <ul class="nav nav-pills nav-stacked">
           <li><a href="{{ path('login') }}">Se connecter</a></li>  
@@ -91,6 +112,8 @@
         <h3>Dernières Inscriptions</h3>
 
       {{ render(controller("GEFORPlatformBundle:Inscription:menu"))}}
+
+    
 
       </div>
 

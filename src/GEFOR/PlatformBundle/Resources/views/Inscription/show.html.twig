@@ -14,19 +14,19 @@
                 <td>{{ candidat.nom }}</td>
             </tr>
         </tbody>
-    </table>
+    </table><br/><br/>
 
-    <ul>
-        <li>
-            <a href="{{ path('Admin') }}">Retour à la console administrateur</a>
-        </li>
-        <li>
-           <a href="{{ path('Inscription_edit', { 'id': candidat.id }) }}">Edit</a>
-        </li>
-        <li>
+   
+            <a href="{{ path('Admin') }}" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Retour à la liste</a>
+            
+        {% if is_granted('ROLE_DEVELOPPEUR') %}
+           <a class="btn btn-default" href="{{ path('Inscription_edit', { 'id': candidat.id }) }}"><span class="glyphicon glyphicon-edit"></span>Modifier</a><br/><br/>
+       {% endif %}
+        
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <button class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-trash"></span> Supprimer</button>
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        {% endif %}
+     
 {% endblock %}

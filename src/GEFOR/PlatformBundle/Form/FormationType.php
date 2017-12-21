@@ -16,7 +16,7 @@ class FormationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('type', TextType::class, array('label'=>'Entrer le nom de la formation a creer :'));
+        ->add('type', TextType::class, array('label'=>'Entrer le nom de la formation :'));
     }
     
     /**
