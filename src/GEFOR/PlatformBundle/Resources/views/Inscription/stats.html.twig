@@ -12,18 +12,19 @@
               <table>
                 <h4><div class="ligne">Formation demandée</div></h4>
 
-              <tr>
-                <th>{{ 'Formation' }}</th>
-                <th>{{ 'Nombre' }}</th>
-                <th>{{ 'Pourcentage' }}</th>
+              <tr class="bdd
+              ">
+                <th class="formation">{{ 'Formation' }}</th>
+                <th class="bdd">{{ 'Nombre' }}</th>
+                <th class="bdd">{{ 'Pourcentage' }}</th>
               </tr>
               <table>      
          {% for key,value in nbcandidat %}  
                 <table>
-                    <tr>  
-                          <td>{{ key }}</td>
-                          <td>{{ value }}</td>
-                          <td>{{ ((value / nbcandidats) * 100)|round(0,'floor') }}</td>     
+                    <tr class="bdd">  
+                          <td class="formation">{{ key }}</td>
+                          <td class="bdd">{{ value }}</td>
+                          <td class="bdd">{{ ((value / nbcandidats) * 100)|round(0,'floor') }}</td>     
                     </tr>
               </table>
             {% endfor %}
@@ -35,20 +36,20 @@
 
               <table>
                 <h4><div class="ligne"> Situation professionelle des candidats </div></h4>
-              <tr>
-                <th>{{ 'Situation' }}</th>
-                <th>{{ 'Nombre' }}</th>
-                <th>{{ 'Pourcentage' }}</th>
+              <tr class="bdd">
+                <th class="bdd">{{ 'Situation' }}</th>
+                <th class="bdd">{{ 'Nombre' }}</th>
+                <th class="bdd">{{ 'Pourcentage' }}</th>
               </tr>
               <table>
 
            
          {% for key,value in nbsituation %}  
                 <table>
-                    <tr>  
-                          <td>{{ key }}</td>
-                          <td>{{ value }}</td>
-                          <td>{{ ((value / nbcandidats) * 100)|round(0,'floor') }}</td>
+                    <tr class="bdd">  
+                          <td class="bdd">{{ key }}</td>
+                          <td class="bdd">{{ value }}</td>
+                          <td class="bdd">{{ ((value / nbcandidats) * 100)|round(0,'floor') }}</td>
                     </tr>
               </table>
             {% endfor %}
@@ -60,18 +61,18 @@
 
             <table>
                 <h4><div class="ligne"> Répartition des financements </div></h4>
-              <tr>
-                <th>{{ 'Situation' }}</th>
-                <th>{{ 'Nombre' }}</th>
-                <th>{{ 'Pourcentage' }}</th>
+              <tr class="bdd">
+                <th class="bdd">{{ 'Situation' }}</th>
+                <th class="bdd">{{ 'Nombre' }}</th>
+                <th class="bdd">{{ 'Pourcentage' }}</th>
               </tr>
               <table>
             {% for key,value in nbfinancement %}  
                 <table>
-                    <tr>  
-                          <td>{{ key }}</td>
-                          <td>{{ value }}</td>
-                          <td>{{ ((value / nbcandidats) * 100)|round(0,'floor') }}</td>
+                    <tr class="bdd">  
+                          <td class="bdd">{{ key }}</td>
+                          <td class="bdd">{{ value }}</td>
+                          <td class="bdd">{{ ((value / nbcandidats) * 100)|round(0,'floor') }}</td>
                     </tr>
               </table>
             {% endfor %}
@@ -81,6 +82,8 @@
             <script type="text/javascript">
             {{ gc_draw(pieChartstats3, 'div_chart_stats3')}}
             </script>
+
+
 
           
 {% endblock %}

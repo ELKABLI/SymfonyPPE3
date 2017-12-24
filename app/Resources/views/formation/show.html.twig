@@ -5,30 +5,199 @@
 
     <table>
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ formation.id }}</td>
+            <tr class="bdd">
+                <th class="bdd" >Id</th>
+                <td class="bdd" >{{ formation.id }}</td>
             </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ formation.type }}</td>
+            <tr class="bdd">
+                <th class="bdd" >Type</th>
+                <td class="bdd" >{{ formation.type }}</td>
             </tr>
         </tbody>
     </table><br/><br/>
 
+   
+  
 
+    {% if formation.id == 22 %}
+    <a href="#item" data-toggle="collapse"><span class="btn btn-default btn-block gris"><h3>Taux de réussite</h3></span></a> 
+
+    <div id="item" class="collapse">
+    <h4>Taux de réussite en 2015 – 90.9 %</h4>
+    <div class="text">  
+    Le BTS Services Informatiques aux Organisations, option Solutions d’infrastructures et réseaux, vise à former des techniciens capables de participer à la production et à la fourniture de services en réalisant ou en adaptant des solutions d’infrastructure et en assurant le fonctionnement optimal des équipements. Il intervient plus particulièrement dans :
+    l’installation, l’intégration, l’administration, la sécurisation des équipements et des services informatiques ;
+    l’exploitation, la supervision et la maintenance d’une infrastructure ;
+    la définition et la configuration des postes clients, des serveurs et des équipements d’interconnexion, leur déploiement et leur maintenance ;
+    la gestion des actifs de l’infrastructure ;
+    la recherche de réponses adaptées à des besoins d’évolution de l’infrastructure ou à des problèmes liés à la mise à disposition des services informatiques ;
+    la résolution des incidents et l’assistance des utilisateurs ;
+    le maintien de la qualité des services informatiques.
+
+    En fonction de la taille de l’organisation, le titulaire du diplôme peut également être amené à participer aux missions suivantes :
+
+    l’étude et la caractérisation de solutions d’évolution ou d’optimisation d’une infrastructure ;
+    la prise en charge de la relation avec les fournisseurs et les prestataires informatiques ;
+    la mesure des performances d’une infrastructure, des équipements ou des services informatiques.
+    </div></div>
     
-            <a href="{{ path('formation_index') }}" class="btn btn-default" >Retour à la liste<i class="glyphicon plyphicon-edit"></i></a>
+     <a href="#item2" data-toggle="collapse"><span class="btn btn-default btn-block gris"><h3>Public</h3></span></a> 
+    <div id="item2" class="collapse">
+    <h4>Public</h4>
+
+    L’action de formation est ouverte  salariés éligibles au titre du congé individuel de formation et aux demandeurs d’emploi, ayant pour objectifs :
+
+    d’accéder à un niveau supérieur de qualification via une formation longue,
+    de se perfectionner et évoluer dans son métier,
+    de changer de profession ou de secteur d’activité.
+    </div>
+
+    <a href="#item3" data-toggle="collapse"><span class="btn btn-default btn-block gris"><h3>Objectifs</h3></span></a> 
+    <div id="item3" class="collapse">
+    <h4>Objectifs</h4>
+
+    Préparer en 1 an et se présenter à l’examen du Brevet de Technicien Supérieur informatique de Gestion – Option Solutions logicielles et applications métiers
+    Etre capable de produire et de fournir des services en développant, en adaptant ou en assurant la maintenance des solutions applicatives
+    </div>
+
+    <a href="#item4" data-toggle="collapse"><span class="btn btn-default btn-block gris"><h3>Pre-requis</h3></span></a> 
+    <div id="item4" class="collapse">
+    <h4>Pre-requis</h4>
+
+    Justifier d’un niveau IV de formation.
+    Satisfaire aux tests d’entrée de validation des pré-requis de niveau IV.
+    </div></br>
+    {% endif %} 
+
+   {% if formation.id == 21 %}
+    <a href="#SLAM" data-toggle="collapse"><span class="btn btn-default btn-block gris"><h3>Taux de réussite</h3></span></a> 
+    <div id="SLAM" class="collapse">     
+    Taux de réussite en 2017 – 100 %
+    Taux de réussite en 2015 – 90.9 %
+
+    Le BTS Services Informatiques aux Organisations, option Solutions logicielles et applications métiers, vise à former des techniciens capables de participer à la production et à la fourniture de services en développant, en adaptant ou en maintenant des solutions applicatives. Il intervient plus particulièrement dans :
+
+    la définition des spécifications techniques à partir de l’expression des besoins des utilisateurs et des contraintes de l’organisation préalablement recensés ;
+    la réalisation ou l’adaptation puis la validation de solutions applicatives à l’aide des environnements de développement retenus ;
+    la gestion du patrimoine applicatif ;
+    la rédaction de la documentation d’une solution applicative et la formation des utilisateurs ;
+    la recherche de réponses adaptées à des problèmes liés à la fourniture des services informatiques ;
+    l’accompagnement et l’assistance des utilisateurs ;
+    le maintien de la qualité des services informatiques.
+
+    En fonction de la taille du projet auquel il est associé, le titulaire du diplôme peut également être amené à participer aux missions suivantes :
+
+    l’étude de l’existant, le recueil des besoins des utilisateurs et l’élaboration du cahier des charges ;
+    le choix des solutions techniques les plus adaptées ;
+    le déploiement et la mise en production d’une solution applicative.
+    </div>
+
+    <a href="#SLAM2" data-toggle="collapse"><span class="btn btn-default btn-block gris"><h3>Public</h3></span></a> 
+
+    <div id="SLAM2" class="collapse">     
+    Public
+
+    L’action de formation est ouverte aux salariés éligibles au titre du congé individuel de formation et aux demandeurs d’emploi, ayant pour objectifs :
+
+    d’accéder à un niveau supérieur de qualification via une formation longue,
+    de se perfectionner et évoluer dans son métier,
+    de changer de profession ou de secteur d’activité.
+    </div>
+
+    <a href="#SLAM3" data-toggle="collapse"><span class="btn btn-default btn-block gris"><h3>Objectifs</h3></span></a> 
+
+    <div id="SLAM3" class="collapse">     
+    Objectifs
+
+    Préparer en 1 an et se présenter à l’examen du Brevet de Technicien Supérieur informatique de Gestion – Option Solutions logicielles et applications métiers
+    Être capable de produire et de fournir des services en développant, en adaptant ou en assurant la maintenance des solutions applicatives
+    </div>
+
+    <a href="#SLAM4" data-toggle="collapse"><span class="btn btn-default btn-block gris"><h3>Pre-requis</h3></span></a> 
+
+    <div id="SLAM4" class="collapse">     
+    Pre-requis
+
+    Justifier d’un niveau IV de formation.
+    Satisfaire aux tests d’entrée de validation des pré-requis de niveau IV.
+    </div></br>
+
+    {% endif %} 
+
+    {% if formation.id == 23 %}
+    <a href="#BANQUE" data-toggle="collapse"><span class="btn btn-default btn-block gris"><h3>Taux de réussite</h3></span></a> 
+
+    <div id="BANQUE" class="collapse">
+Taux de réussite en 2017 – 82.4% %
+Taux de réussite en 2016 – 82.6 %
+Taux de réussite en 2015 – 92.9 %
+
+Le BTS Banque – conseiller de clientèle particulier, permet de devenir chargé de clientèle (ou conseiller de clientèle) dans le secteur bancaire en direction de particuliers.
+
+Qualités et aptitudes
+
+    Avoir le sens de la rigueur et de la qualité
+    Le sens aigu de la communication
+    Etre capable de prendre du recul face à une problématique donnée et de trouver une solution appropriée
+    Respectant à la fois l’attente du client et la politique commerciale de l’entreprise
+    Savoir équilibrer autonomie et travail en équipe
+
+Formation
+
+Le BTS Banque a été mis en place face à la demande insistante de l’Association française des banques, pour faire face aux très nombreux départs à la retraite d’ici à 2015.
+
+La formation met l’accent sur la connaissance de l’environnement professionnel et économique, la maîtrise de la communication écrite et orale, l’aptitude à la vente et à la négociation commerciale, la maîtrise du cadre juridique de l’activité, l’analyse des règles fiscales applicables, la maîtrise de l’outil informatique et de l’ensemble des techniques de la banque et de l’assurance.
+
+Le BTS Banque permet aux candidats de s’adapter à l’ensemble des activités de la banque en tant qu’employés de haut niveau, et donc d’avoir un choix assez vaste de choix de métiers, ou de poursuite d’études dans ces domaines.
+
+L’objectif est de former des collaborateurs chargés de clientèle en direction des particuliers, et de former des assistants capables de prendre des initiatives et de seconder efficacement la direction d’une entreprise.
+</div>
+<a href="#BANQUE2" data-toggle="collapse"><span class="btn btn-default btn-block gris"><h3>Objectifs</h3></span></a> 
+
+    <div id="BANQUE2" class="collapse">
+Objectifs
+
+Les objectifs de la formation sont les suivants:
+
+– Se préparer en 1 an et se présenter à l’examen du Brevet de Technicien Supérieur en Banque, Conseiller de clientèle Particulier.
+
+– Etre capable d’exercer les fonctions de chargé de clientèle en direction des particuliers, acquérir de solides connaissances en économie et droit appliqués aux activités bancaires ainsi qu’un haut niveau de technicité en matière de gestion de clientèle.
+
+    Connaissance de l’environnement : économie monétaire et bancaire, droit général et bancaire
+    Compétence technique : techniques bancaires orientées vers le marché des particuliers
+    Dimension relationnelle : gestion de clientèle et communication professionnelle
+</div>
+
+<a href="#BANQUE3" data-toggle="collapse"><span class="btn btn-default btn-block gris"><h3>Objectifs</h3></span></a> 
+
+    <div id="BANQUE3" class="collapse">
+Débouchés
+
+    Chargé de clientèle en direction des particuliers
+    Evolution vers des fonctions d’encadrement par promotion interne
+</div></br>
+
+    {% endif %}
+
+
+
+
+    {# ci dessous les boutons #}
+
+            <a href="{{ path('formation_index') }}" class="btn btn-default" ><i class="glyphicon glyphicon-chevron-left"></i> Retour à la liste</a>
             
         {% if is_granted('ROLE_DEVELOPPEUR') %}
-            <a class="btn btn-default" href="{{ path('formation_edit', { 'id': formation.id }) }}">Modifier</a><br/><br/>
+            <a class="btn btn-default" href="{{ path('formation_edit', { 'id': formation.id }) }}">Modifier  <i class="glyphicon glyphicon-edit"></i></a><br/><br/>
         {% endif %}
    
 
         {% if is_granted('ROLE_SUPER_ADMIN') %}
             {{ form_start(delete_form) }}
-                <input class="btn btn-delete" type="submit" value="Supprimer">
+                <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash">Supprimer</span>
+                </button> 
             {{ form_end(delete_form) }}
         {% endif %}
+
+       
    
 {% endblock %}

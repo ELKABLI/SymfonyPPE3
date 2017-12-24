@@ -1,31 +1,32 @@
 {% extends "GEFORPlatformBundle::layout.html.twig" %}
 
-{% block body %}
-    <h1>Liste des utilisateurs</h1>
+{% block ocplatform_body %}
+   
+    <div class="navbar navbar-default gris"><h2>Liste des utilisateurs</h2></div>
 
     <table>
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Identifiant</th>
-                <th>Mot de passe</th>
+            <tr class="bdd">
+                <th class="bdd">Id</th>
+                <th class="bdd">Identifiant</th>
+                <th class="bdd">Mot de passe</th>
                 {#<th>Salt</th>#}
                 <th class="droit">Droit</th>
                 {% if is_granted('ROLE_DEVELOPPEUR') %}
-                <th>Actions</th>
+                <th class="bdd">Actions</th>
                 {% endif %}
             </tr>
         </thead>
         <tbody>
         {% for user in users %}
-            <tr>
-                <td><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
-                <td>{{ user.username }}</td>
-                <td>{{ user.password }}</td>
+            <tr class="bdd">
+                <td class="bdd"><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
+                <td class="bdd">{{ user.username }}</td>
+                <td class="bdd">{{ user.password }}</td>
                 {#<td>{{ user.salt }}</td>#}
                 <td class="droit">{% if user.roles %}{{ user.roles|join(', ') }}{% endif %}</td>
                 {% if is_granted('ROLE_DEVELOPPEUR') %}
-                <td>
+                <td class="bdd">
                     <ul>
                         <li>
                             <a href="{{ path('user_show', { 'id': user.id }) }}">Voir</a>

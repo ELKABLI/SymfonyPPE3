@@ -1,123 +1,119 @@
 {# app/Resources/views/layout.html.twig #}
 
 
-
 <!DOCTYPE html>
 
 <html>
 
 <head>
 
+
   <meta charset="utf-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
   <title>{% block title %}GEFOR Plateforme{% endblock %}</title>
-
-
   {% block stylesheets %}
-
     {# On charge le CSS de bootstrap depuis le site directement 
-
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">#}
-    
+    <link rel="stylesheet" href="{{ asset('asset/font-awesome-4.7.0/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('asset/bootstrap-3.2.0/dist/css/bootstrap.min.css') }}">
     
-
     <link rel="stylesheet" href="{{ asset('asset/gefor.css') }}" type="text/css" media="all">
-
-      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-
-    <link rel="stylesheet" href="{{ asset('asset/loader.js') }}">
-
-
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  
   {% endblock %}
 
 </head>
 
-
 <body>
-  
-  <div class="container">
-
-    <div id="header" class="jumbotron ali" >
-
-      <img src="http://www.gefor.com/wp-content/uploads/2015/11/gefor_logo_slogan.png" />
-
-
-      <h1>Inscription en ligne</h1>
-
-
-      <p>
-
-        Cette plateforme vous est proposée par GEFOR,<br />
-        elle vous permet une inscription en ligne.
-
-      </p>
-
+  <div class="container-fluid">
+    <div id="header" class="jumbotron navbar navbar-default navbar-fixed-top ali" >
+      <img class="col-md-2" src="http://www.gefor.com/wp-content/uploads/2015/11/gefor_logo_slogan.png" />
+      <div class="col-md-8">
+      <nav class="navbar pull-right">
+        <ul class="nav navbar-nav">
+          <li> <a href="#">Groupe GEFOR</a> </li>
+          <li> <a href="#">Les dispositifs de formation</a> </li>
+          <li class="dropdown"> 
+            <a data-toggle="dropdown" href="#">Nos Formations<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">BTS SIO</a></li>
+              <li><a href="#">BTS BANQUE</a></li>
+              <li><a href="#">BTS CG</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Autres formation</a></li>
+            </ul>
+          </li>
+          <li> <a href="#">Contact</a> </li>
+        </ul>
+      </nav>
+    </div>
     </div>
 
     
     <div class="row">
 
-      <div id="menu" class="col-md-3">
+      <div id="menu" class="col-md-offset-1 col-md-2 col-md-offset-1">
 
-        <h3>Navigation</h3>
 
+        <div class="navbar navbar-custom">
         <ul class="nav nav-pills nav-stacked">
-
-          <li><a href="{{ path('Inscription') }}">S'inscrire en ligne</a></li>
-          
-          <li><a href="{{ path('formation_index') }}">Formations</a></li>
-
+          <li id="me" class="menu">Navigation</li>
+          <li id="puce" class="menu" ><a class="gris" href="{{ path('Inscription') }}">S'inscrire en ligne<i class="fa fa-link pull-right"></i></a></li>
+          <li id="puce" class="menu" ><a class="gris" href="{{ path('formation_index') }}">Formations<i class="fa fa-link pull-right"></i></a></li>
         {% if is_granted('ROLE_DEVELOPPEUR') %}
-          <li><a href="{{ path('Admin') }}">Administration</a></li>
+          <li id="puce" class="menu" ><a class="gris" href="{{ path('Admin') }}">Administration<i class="fa fa-link pull-right"></i></a></li>
         {% endif %}
-
-          <li><a href="{{ path('Admin_stats') }}">Statistiques</a></li>
-
+          <li id="puce" class="menu" ><a class="gris" href="{{ path('Admin_stats') }}">Statistiques<i class="fa fa-link pull-right"></i></a></li>
         </ul>
+        </div>
 
+        <div class="navbar navbar-custom">
+          {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
         
-      {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
+          <ul class="nav nav-pills nav-stacked">
+          <li id="me" class="menu">Créer un compte<i class="fa fa-link pull-right"></i></li>
+          <li id="puce" class="menu"><a class="gris" href="{{ path('user_new') }}">Je créer mon compte<i class="fa fa-link pull-right"></i></a></li>   
+          </ul>
+          {% else %}
+          {% if is_granted('ROLE_DEVELOPPEUR') %}
+  
+            
+            <ul class="nav nav-pills nav-stacked">
+              <li id="me" class="menu">Créer un compte</li>
+              <li id="puce" class="menu"><a class="gris" href="{{ path('user_new') }}">Je créer mon compte<i class="fa fa-link pull-right"></i></a></li>
+              <li id="puce" class="menu"><a class="gris" href="{{ path('user_index') }}">Liste des utilisateurs<i class="fa fa-link pull-right"></i></a></li>   
+            </ul>
+          {% endif %}
+          {% endif %}
+        </div>
 
-        <h3>Créer un compte</h3>
-         <ul class="nav nav-pills nav-stacked">
-          <li><a href="{{ path('user_new') }}">Je créer mon compte</a></li>   
-        </ul>
-      {% else %}
-        {% if is_granted('ROLE_DEVELOPPEUR') %}
-
-        <h3>Créer un compte</h3>
-         <ul class="nav nav-pills nav-stacked">
-          <li><a href="{{ path('user_new') }}">Je créer mon compte</a></li>
-          <li><a href="{{ path('user_index') }}">Liste des utilisateurs</a></li>   
-        </ul>
-
-      {% endif %}
-      {% endif %}
+       
+        <div class="panel panel-info">
+           <div class="panel-heading">
+           <a class="panel-title">Identifiez vous</a></div>
 
 
-        <h3>Identifiez vous</h3>
-
-        <ul class="nav nav-pills nav-stacked">
+           <div class="panel-body">
+          <ul class="nav nav-pills nav-stacked">
           <li><a href="{{ path('login') }}">Se connecter</a></li>  
-          <li><a href="{{ path('logout') }}">Déconnexion</a></li>
-        </ul>
+            <li><a href="{{ path('logout') }}"> Déconnexion</a></li>
+            </ul>
+
+            </div>
+
+            </div>
 
 
 
-        <h3>Dernières Inscriptions</h3>
+         {% if is_granted('ROLE_DEVELOPPEUR') %}
+        <h2>Dernières Inscriptions</h2>
 
       {{ render(controller("GEFORPlatformBundle:Inscription:menu"))}}
-
-    
+        {% endif %}
 
       </div>
 
-      <div id="content" class="col-md-9">
+      <div id="content" class="col-md-offset-1 col-md-6">
 
         {% block body %}
 
@@ -133,7 +129,31 @@
 
     <footer class="jumbotron ali">
 
-      <p>The sky's the limit © {{ 'now'|date('Y') }} and beyond.</p>
+      <div class="container-fluid">
+
+      <div class="row_footer">
+
+        <div class="col-lg-offset-1 col-lg-2 centrer">7 Rue du Louvre, 75007 Paris</div>
+
+        <div class="col-lg-3 centrer">contact@gefor.com</div>
+
+        <div class="col-lg-3 centrer">01 55 35 00 20</div>
+
+        <div class="col-lg-3 centrer">
+
+          
+              <a href="https://www.facebook.com/GroupeGEFOR/" target="_blank"><i class="fa fa-facebook-square fa-3x social"></i></a>
+              <a href="https://twitter.com/groupegefor" target="_blank"><i class="fa fa-twitter-square fa-3x social"></i></a>
+              <a href="https://www.linkedin.com/company/groupe-gefor/?trk=company_logo" target="_blank"><i class="fa fa-linkedin-square fa-3x social"></i></a>
+              
+        </div>
+
+        </div>
+
+        </div>
+
+
+      
 
     </footer>
 
@@ -141,14 +161,17 @@
 
 
   {% block javascripts %}
-
-    {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+    {# les 2 1er lignes JavaScript pour se servir des fonctionnalités du bootstrap Twitter 
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>#}
 
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
+    {# passage en localhost !! #}
+    <script src="{{ asset('asset/bootstrap-3.2.0/js/tests/vendor/jquery.min.js') }}"></script> 
+    <script src="{{ asset('asset/bootstrap-3.2.0/dist/js/bootstrap.min.js') }}"></script>  
   {% endblock %}
+
+
 
 
 </body>

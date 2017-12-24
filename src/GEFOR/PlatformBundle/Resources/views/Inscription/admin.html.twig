@@ -1,23 +1,22 @@
 {% extends "GEFORPlatformBundle::layout.html.twig" %}
 
 {% block ocplatform_body %}
-
-   <script type="text/javascript" src="{{ asset('loader.js') }}"></script>
-
   
-  <a href="#item" data-toggle="collapse"><h2>Demande d' Inscritpion</h2></a> 
+  <a href="#item" data-toggle="collapse"><span class="btn btn-default btn-block gris"><h3>Demande d' Inscritpion</h3></span></a> 
+
+
 
 <div id="item" class="collapse">
        <table>
-              <tr>
+              <tr class="bdd">
                 <th class="id">Id</th>
-                <th>{{ 'Date' }}</th>
-                <th>{{ 'Projet' }}</th>
-                <th>{{ 'nom' }}</th>
-                <th>{{ 'prénom' }}</th>
+                <th class="bdd">{{ 'Date' }}</th>
+                <th class="formation">{{ 'Projet' }}</th>
+                <th class="bdd">{{ 'nom' }}</th>
+                <th class="bdd">{{ 'prénom' }}</th>
                 {#<th>{{ 'Adresse' }}</th>#}
-                <th>{{ 'Cp' }}</th>   
-                <th>{{ 'Situation' }}</th>
+                <th class="bdd">{{ 'Cp' }}</th>   
+                <th class="formation">{{ 'Situation' }}</th>
                 <th class="modifier">{{ 'Action' }}</th>
                 
               </tr>
@@ -26,17 +25,17 @@
         	{% for a in candidat %}
             <table>
                         
-              <tr> 
+              <tr class="bdd"> 
                 <td class="id"><a href="{{ path('Inscription_show', { 'id': a.id }) }}">{{ a.id }}</a></td>      
-                <td>{{ a.date|date('d-m-Y') }}</td>
-                <td>{{ a.Formation.type }}</td>
-                <td>{{ a.nom }}</td>
-                <td>{{ a.prenom }}</td>
+                <td class="bdd">{{ a.date|date('d-m-Y') }}</td>
+                <td class="formation">{{ a.Formation.type }}</td>
+                <td class="bdd">{{ a.nom }}</td>
+                <td class="bdd">{{ a.prenom }}</td>
                 {#<td>{{ a.neele|date('Y') }}</td>#}  
                 {#<td>{{ a.numerosecu }}</td>#}
                 {#<td>{{ a.adresse }}</td>#}
-                <td>{{ a.cp }}</td>  
-                <td>{{ a.Situation.type }}</td>
+                <td class="bdd">{{ a.cp }}</td>  
+                <td class="formation">{{ a.Situation.type }}</td>
                 <td class="modifier" >
                   <li>
                   <a href="{{ path('Inscription_show', { 'id': a.id }) }}">{{ 'Modifier' }}</a>
@@ -65,7 +64,7 @@
     </script>
 #}
     
- <a href="#item2" data-toggle="collapse"><h3>Affichage par projet souhaité</h3></a> 
+ <a href="#item2" data-toggle="collapse"><span class="btn btn-default btn-block gris"><h3>Affichage par projet souhaité</h3></span></a> 
 
 <div id="item2" class="collapse">
 
@@ -128,29 +127,29 @@
              
         
               <table>
-                <h3><div class="ligne"> {{ loop.index~"  "~a.type }} </div></h3>
+                <h3><div class="ligne"> {{ a.type }} </div></h3>
               <table>
-              <tr>
+              <tr class="bdd">
                 <th class="id">Id</th>
-                <th>{{ 'Date' }}</th>
-                <th>{{ 'Projet' }}</th>
-                <th>{{ 'Nom' }}</th>
-                <th>{{ 'Prénom' }}</th>
-                <th>{{ 'Cp' }}</th>
-                <th>{{ 'Situation' }}</th>
+                <th class="bdd">{{ 'Date' }}</th>
+                <th class="formation">{{ 'Projet' }}</th>
+                <th class="bdd">{{ 'Nom' }}</th>
+                <th class="bdd">{{ 'Prénom' }}</th>
+                <th class="bdd">{{ 'Cp' }}</th>
+                <th class="formation">{{ 'Situation' }}</th>
                 <th class="modifier">{{ 'Action' }}</th>
               </tr>
               <table>
                 {% for b in a.candidats %}
                 <table>
-                    <tr>
+                    <tr class="bdd">
                           <td class="id"><a href="{{ path('Inscription_show', { 'id': b.id }) }}">{{ b.id }}</a></td>      
-                          <td>{{ b.date|date('d-m-Y') }}</td>
-                          <td>{{ a.type }}</td>
-                          <td>{{ b.nom }}</td>
-                          <td>{{ b.prenom }}</td>
-                          <td>{{ b.cp }}</td>
-                          <td>{{ b.situation.type }}</td>
+                          <td class="bdd">{{ b.date|date('d-m-Y') }}</td>
+                          <td class="formation">{{ a.type }}</td>
+                          <td class="bdd">{{ b.nom }}</td>
+                          <td class="bdd">{{ b.prenom }}</td>
+                          <td class="bdd">{{ b.cp }}</td>
+                          <td class="formation">{{ b.situation.type }}</td>
                           <td class="modifier">
                   <li>
                   <a href="{{ path('Inscription_show', { 'id': b.id }) }}">{{ 'Modifier' }}</a>
@@ -174,7 +173,7 @@
 
     </div>
 
-<a href="#item3" data-toggle="collapse"><h3>Prise de contact</h3></a> 
+<a href="#item3" data-toggle="collapse"><span class="btn btn-default btn-block gris"><h3>Prise de contact</h3></span></a> 
 
 <div id="item3" class="collapse">
 
@@ -184,22 +183,22 @@
  <h3><div class="ligne"> Demande de Rendez - Vous </div></h3>
 
   <table>
-              <tr>
-                <th>Id</th>
-                <th>{{ 'Nom' }}</th>
-                <th>{{ 'prénom' }}</th>
-                <th>{{ 'Date demande' }}</th>
-              </tr>
+              <tr class="bdd">
+                <th class="bdd">Id</th>
+                <th class="bdd">{{ 'Nom' }}</th>
+                <th class="bdd">{{ 'prénom' }}</th>
+                <th class="bdd">{{ 'Date demande' }}</th>
+              </tr >
               <table>
 
           {% for a in contactarray %}
 
 
            
-              <table><tr> 
+              <table><tr class="bdd"> 
               {% for key,value  in a %} 
               {# <td class="id"><a href="{{ path('Inscription_show', { 'id': b.id }) }}">{{ b.id }}</a></td> #}
-              <td>
+              <td class="bdd">
                 {% if key == 0  %}
                 <a href="{{ path('Inscription_show', { 'id': value }) }}">{{ value }}</a>
                 {% else %}
@@ -214,4 +213,3 @@
           </div>
          
 {% endblock %}
-

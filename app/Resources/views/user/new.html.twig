@@ -1,6 +1,6 @@
 {% extends "GEFORPlatformBundle::layout.html.twig" %}
 
-{% block body %}
+{% block ocplatform_body %}
     <h1>Création de compte</h1>
 
     {{ form_start(form) }}
@@ -14,5 +14,10 @@
             <a class="btn btn-default" href="{{ path('user_index') }}"><span class="glyphicon glyphicon-chevron-left"></span> Retour à la liste</a>
 
         {% endif %}
+
+         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
    
 {% endblock %}

@@ -1,13 +1,13 @@
 {% extends "GEFORPlatformBundle::layout.html.twig" %}
 
 {% block body %}    {{ parent() }}
-    <h3>Formations disponibles</h3>
+    <h3>Formations disponibles</h3></br>
 
     <table>
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Type</th>
+            <tr class="bdd">
+                <th class="bdd">Id</th>
+                <th class="bdd">Type</th>
                 {% if is_granted('ROLE_DEVELOPPEUR') %}
                 <th>Actions</th>
                 {% endif %}
@@ -15,9 +15,9 @@
         </thead>
         <tbody>
         {% for formation in formations %}
-            <tr>
-                <td><a href="{{ path('formation_show', { 'id': formation.id }) }}">{{ formation.id }}</a></td>
-                <td>{{ formation.type }}</td>
+            <tr class="bdd">
+                <td class="bdd"><a href="{{ path('formation_show', { 'id': formation.id }) }}">{{ formation.id }}</a></td>
+                <td class="bdd">{{ formation.type }}</td>
                 {% if is_granted('ROLE_DEVELOPPEUR') %}
                 <td>
                     <ul>

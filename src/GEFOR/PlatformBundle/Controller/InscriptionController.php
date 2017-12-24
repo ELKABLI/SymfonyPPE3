@@ -423,7 +423,7 @@ class InscriptionController extends Controller
         
         return $this->render('GEFORPlatformBundle:Inscription:admin.html.twig', array('candidat' => $candidat, 'situation' => $situations, 'formation' => $formations, 'piechartg1' => $pieChartg1, 'piechartg2' => $pieChartg2, 'piechart' => $pieChart, 'nbcandidat' => $testarray, 'nbsituation' => $situationarray, 'nbcandidats' => $nbcandidats, 'contactarray' => $contactarray));
 
-        return $this->redirectToRoute('Inscription_show', array('candidat' => $candidat)); // on transmet au controlleur showAction les candidats, showAction récuper ces objets et les transmets a sa vu.
+        //pas necessaire return $this->redirectToRoute('Inscription_show', array('candidat' => $candidat)); // on transmet au controlleur showAction les candidats, showAction récuper ces objets et les transmets a sa vu.
 
     }
 
@@ -589,7 +589,7 @@ class InscriptionController extends Controller
 
         $option->getOptions()->setIs3D(true);
         $option->getOptions()->setHeight(300);
-        $option->getOptions()->setWidth(600);
+        $option->getOptions()->setBackgroundColor('#cacfd2');
         $option->getOptions()->getTitleTextStyle()->setBold(true);
         $option->getOptions()->getTitleTextStyle()->setColor('#009900');
         $option->getOptions()->getTitleTextStyle()->setItalic(true);
