@@ -7,6 +7,7 @@ use GEFOR\PlatformBundle\Entity\Candidat;
 use GEFOR\PlatformBundle\Form\CandidatType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class InscriptionController extends Controller
 {

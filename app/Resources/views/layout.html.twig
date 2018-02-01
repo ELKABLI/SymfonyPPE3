@@ -25,9 +25,10 @@
 </head>
 
 <body>
+  {#http://www.gefor.com/wp-content/uploads/2015/11/gefor_logo_slogan.png#}
   <div class="container-fluid">
     <div id="header" class="jumbotron navbar navbar-default navbar-fixed-top ali" >
-      <img class="col-md-2" src="http://www.gefor.com/wp-content/uploads/2015/11/gefor_logo_slogan.png" />
+      <img class="col-md-2" src="" />
       <div class="col-md-8">
       <nav class="navbar pull-right">
         <ul class="nav navbar-nav">
@@ -71,7 +72,7 @@
           {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
         
           <ul class="nav nav-pills nav-stacked">
-          <li id="me" class="menu">Créer un compte<i class="fa fa-link pull-right"></i></li>
+          <li id="me" class="menu">Créer un compte</li>
           <li id="puce" class="menu"><a class="gris" href="{{ path('user_new') }}">Je créer mon compte<i class="fa fa-link pull-right"></i></a></li>   
           </ul>
           {% else %}

@@ -62,7 +62,7 @@ th.bdd, td.bdd {
 
 th.formation, td.formation{
 
-		width: 180px;
+		width: 150px;
 		text-align:left;
 		border-right:0;
 		color: inherit;
@@ -197,6 +197,16 @@ a.gris{
 .text{
 
 	text-align: justify;
+}
+
+.acceuil{
+
+
+	height: 500px;
+	background: green;
+
+	/*background-image: ;*/
+
 }
 
 }
