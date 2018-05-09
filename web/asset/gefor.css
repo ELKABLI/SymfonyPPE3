@@ -22,10 +22,10 @@ footer.ali.jumbotron{
 
 body {
 	font-size: 20px;
-	background:  #7b7d7d ;
+	background:  white ;
 }
 
-.col-md-6{
+.col-md-7{
 	background:  #cacfd2;
 	padding-top: 20px;
 	padding-bottom: 40px;
@@ -177,6 +177,7 @@ td.modifier, th.modifier{
 a.gris{
 
 	color: #999;
+	font-size: 15px;
 }
 
 .gris{

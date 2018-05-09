@@ -11,16 +11,11 @@
 
       {% endfor %}
 
-  <h3>Merci de renseigner les éléments du formulaire</h3>
-
-
-
-
+  <h3>Merci de renseigner les éléments du formulaire</h3> 
+  <object data="{{ asset('asset/photo/ppe3.pdf') }}" type="application/pdf">
+   <a href="{{ asset('asset/notice.pdf') }}" target="_blank">Aide</a>
+   </object>
 
       {{ form(form) }}
     
-      
-
-
 {% endblock %}
-

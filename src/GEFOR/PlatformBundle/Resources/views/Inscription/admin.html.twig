@@ -8,7 +8,9 @@
 
 <div id="item" class="collapse">
        <table>
+       
               <tr class="bdd">
+         
                 <th class="id">Id</th>
                 <th class="bdd">{{ 'Date' }}</th>
                 <th class="formation">{{ 'Projet' }}</th>
@@ -26,7 +28,7 @@
             <table>
                         
               <tr class="bdd"> 
-                <td class="id"><a href="{{ path('Inscription_show', { 'id': a.id }) }}">{{ a.id }}</a></td>      
+                <td class="id"><a href="{{ path('Inscription_show', { 'id': a.id }) }}">{{ a.id }}</a></td>    
                 <td class="bdd">{{ a.date|date('d-m-Y') }}</td>
                 <td class="formation">{{ a.Formation.type }}</td>
                 <td class="bdd">{{ a.nom }}</td>
@@ -39,8 +41,7 @@
                 <td class="modifier" >
                   <li>
                   <a href="{{ path('Inscription_show', { 'id': a.id }) }}">{{ 'Modifier' }}</a>
-                  </li>
-                  
+                  </li> 
                 </td> 
               </tr>
             </table>
@@ -143,7 +144,7 @@
                 {% for b in a.candidats %}
                 <table>
                     <tr class="bdd">
-                          <td class="id"><a href="{{ path('Inscription_show', { 'id': b.id }) }}">{{ b.id }}</a></td>      
+                          <td class="id"><a href="{{ path('Inscription_show', { 'id': b.id }) }}">{{ b.id }}</a></td>    
                           <td class="bdd">{{ b.date|date('d-m-Y') }}</td>
                           <td class="formation">{{ a.type }}</td>
                           <td class="bdd">{{ b.nom }}</td>
@@ -153,9 +154,8 @@
                           <td class="modifier">
                   <li>
                   <a href="{{ path('Inscription_show', { 'id': b.id }) }}">{{ 'Modifier' }}</a>
-                  </li>
-                  
-                </td>       
+                  </li>                 
+                </td>     
                     </tr>
               </table>
 
@@ -195,21 +195,20 @@
 
 
            
-              <table><tr class="bdd"> 
+              <table> 
+                <tr class="bdd"> 
               {% for key,value  in a %} 
               {# <td class="id"><a href="{{ path('Inscription_show', { 'id': b.id }) }}">{{ b.id }}</a></td> #}
               <td class="bdd">
                 {% if key == 0  %}
                 <a href="{{ path('Inscription_show', { 'id': value }) }}">{{ value }}</a>
                 {% else %}
-
                   {{ value }}
-
                {% endif %}
               </td>  
               {% endfor %}
-            </tr></table>
+            </tr>
+          </table>
             {% endfor %}
-          </div>
-         
+          </div>         
 {% endblock %}
